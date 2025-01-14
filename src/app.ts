@@ -1,8 +1,8 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 const app = express()
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+app.get('/', (req:Request, res:Response) => {
+  res.send('SiSCOTEk server!')
 })
 
 export default app
