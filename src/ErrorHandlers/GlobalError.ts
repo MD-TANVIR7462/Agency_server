@@ -18,4 +18,4 @@ const globalError: globalError = (error, req, res, next) => {
   });
 };
 
-export default globalError
+export default globalError;
