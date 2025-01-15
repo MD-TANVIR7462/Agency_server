@@ -16,6 +16,7 @@ const getServices: RequestHandler = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: "Services retrieve successfully.",
+      dataLength:data.length,
       data,
     });
   } catch (err) {

@@ -2,11 +2,11 @@ import { TService } from "./service.interface";
 import ServiceModel from "./service.model";
 
 const getServices = async () => {
-  const result = await ServiceModel.find({ isActive: true, isDeleted: false });
+  const result = await ServiceModel.find({ isActive: true, isDeleted: false }).select("-__v");
   return result;
 };
 const getAService = async (id: string) => {
-  const result = await ServiceModel.findById(id);
+  const result = await ServiceModel.findById(id).select("-__v");
   return result;
 };
 const createService = async (data: TService) => {

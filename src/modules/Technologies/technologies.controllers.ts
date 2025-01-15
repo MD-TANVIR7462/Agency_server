@@ -19,6 +19,7 @@ const getTechnology: RequestHandler = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: "Technologies retrieve successfully.",
+      dataLength:data.length,
       data,
     });
   } catch (err) {

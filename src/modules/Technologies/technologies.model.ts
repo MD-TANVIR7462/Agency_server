@@ -9,6 +9,7 @@ const technologySchema = new Schema<TTechnologies>(
       trim: true,
       minlength: [1, "Name cannot be empty."],
       maxlength: [30, "Name cannot exceed 30 characters."],
+      
     },
     tech: {
       type: [String],

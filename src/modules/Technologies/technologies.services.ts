@@ -5,11 +5,11 @@ const getTechnology = async () => {
   const result = await TechnologyModel.find({
     isActive: true,
     isDeleted: false,
-  });
+  }).select("-__v");
   return result;
 };
 const getATechnology = async (id: string) => {
-  const result = await TechnologyModel.findById(id);
+  const result = await TechnologyModel.findById(id).select("-__v");
   return result;
 };
 const createTechnology = async (data: TTechnologies) => {

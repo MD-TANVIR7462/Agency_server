@@ -16,6 +16,6 @@ export const validateTechnology = z.object({
     .max(30, "Gradient cannot exceed 30 characters."),
   isActive: z.boolean().optional().default(true),
   isDeleted: z.boolean().optional().default(false),
-});
+}).strict();
 
 export const validateUpdateTechnology = validateTechnology.partial();
