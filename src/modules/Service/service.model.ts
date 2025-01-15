@@ -15,14 +15,14 @@ const serviceSchema = new Schema<TService>(
       required: [true, "Short description is required."],
       trim: true,
       minlength: [1, "Short description cannot be empty."],
-      maxlength: [80, "Short description cannot exceed 60 characters."],
+      maxlength: [150, "Short description cannot exceed 150 characters."],
     },
     fullDes: {
       type: String,
       required: [true, "Full description is required."],
       trim: true,
       minlength: [1, "Full description cannot be empty."],
-      maxlength: [200, "Full description cannot exceed 120 characters."],
+      maxlength: [260, "Full description cannot exceed 250 characters."],
     },
     features: {
       type: [String],

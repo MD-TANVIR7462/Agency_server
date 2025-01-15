@@ -10,11 +10,11 @@ export const validateService = z
     shortDes: z
       .string()
       .min(1, "Short description cannot be empty.")
-      .max(60, "Short description cannot exceed 60 characters."),
+      .max(150, "Short description cannot exceed 150 characters."),
     fullDes: z
       .string()
       .min(1, "Full description cannot be empty.")
-      .max(120, "Full description cannot exceed 120 characters."),
+      .max(260, "Full description cannot exceed 260 characters."),
     features: z.array(z.string()).min(1, "At least one feature is required."),
     technologies: z
       .array(z.string())
@@ -35,12 +35,12 @@ export const validateUpdateService = z
     shortDes: z
       .string()
       .min(1, "Short description cannot be empty.")
-      .max(60, "Short description cannot exceed 60 characters.")
+      .max(150, "Short description cannot exceed 150 characters.")
       .optional(),
     fullDes: z
       .string()
       .min(1, "Full description cannot be empty.")
-      .max(120, "Full description cannot exceed 120 characters.")
+      .max(260, "Full description cannot exceed 260 characters.")
       .optional(),
     features: z
       .array(z.string())

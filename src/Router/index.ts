@@ -5,5 +5,6 @@ const router = Router();
 
 router.use("/banner", BannerRoutes);
 router.use("/service", ServiceRouter);
-
+// router.use("/technologies");
+// router.use("/technologies");
 export default router;

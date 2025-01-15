@@ -82,7 +82,8 @@ const updateAService: RequestHandler = async (req, res, next) => {
 const deleteAService: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const data = await ServiceServices.deleteAService(id);
+
+    const data = await ServiceServices.deleteAService(id, req.body.isDeleted as boolean);
     if (!data) {
       res.status(400).json({
         success: false,
@@ -101,9 +102,9 @@ const deleteAService: RequestHandler = async (req, res, next) => {
 };
 
 export const ServiceController = {
-    getServices,
-    getAService,
-    createService,
-    updateAService,
-    deleteAService
-}
+  getServices,
+  getAService,
+  createService,
+  updateAService,
+  deleteAService,
+};
