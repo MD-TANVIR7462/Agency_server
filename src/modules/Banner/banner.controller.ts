@@ -21,11 +21,12 @@ const getBanner: RequestHandler = async (req, res, next) => {
     const data = await BannerServices.getBanner();
 
     if (!data || data?.length <= 0) {
-      res.status(404).json({
+      res.status(200).json({
         success: false,
         message: "No data found in the database.",
         data,
       });
+      return;
     }
 
     res.status(200).json({
