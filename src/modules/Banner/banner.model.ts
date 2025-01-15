@@ -21,6 +21,11 @@ const bannerSchema = new Schema<TBanner>(
       trim: true,
       maxlength: [180, "Subtext cannot exceed 250 characters."],
     },
+    isActive: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
     img_url: {
       type: String,
       required: [true, "Image URL is required."],

@@ -3,4 +3,5 @@ export type TBanner = {
   title2: string;
   subtext: string;
   img_url: string;
+  isActive?: boolean;
 };

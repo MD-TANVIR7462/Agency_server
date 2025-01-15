@@ -3,7 +3,7 @@ import express from "express";
 import { BannerController } from "./banner.controller";
 const router = Router();
 
-router.get("/");
+router.get("/",BannerController.getBanner);
 router.post("/create-banner", BannerController.createBanner);
 router.patch("/");
 router.delete("/");
