@@ -1,9 +1,10 @@
 import { RequestHandler } from "express";
 import { BannerServices } from "./banner.service";
+import { validateBanner, validateBannerUpdate } from "./banner.validation";
 
 const createBanner: RequestHandler = async (req, res, next) => {
   try {
-    const bannerData = req.body;
+    const bannerData = validateBanner.parse(req.body);
     const data = await BannerServices.createBanner(bannerData);
     res.status(201).json({
       success: true,
@@ -40,8 +41,15 @@ const getBanner: RequestHandler = async (req, res, next) => {
 const updateBanner: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const updateData = req.body;
+    const updateData = validateBannerUpdate.parse(req.body);
     const data = await BannerServices.updateBanner(id, updateData);
+    if (!data) {
+      res.status(400).json({
+        success: false,
+        message: `Banner not updated, make sure the id:${id} is correct. `,
+        data,
+      });
+    }
     res.status(200).json({
       success: true,
       message: "Banner updated successfully",
