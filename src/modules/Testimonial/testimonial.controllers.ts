@@ -20,6 +20,23 @@ const getTestimonial: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
+const getActiveTestimonial: RequestHandler = async (req, res, next) => {
+  try {
+    const data = await TestimonialServices.getActiveTestimonial();
+    if (data.length <= 0) {
+      emptyResponse(res, data);
+      return;
+    }
+    res.status(200).json({
+      success: true,
+      message: "Testimonials retrieve successfully.",
+      dataLength: data.length,
+      data,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
 
 const getATestimonial: RequestHandler = async (req, res, next) => {
   try {
@@ -90,6 +107,7 @@ const deleteATestimonial: RequestHandler = async (req, res, next) => {
 
 export const TestimonialController = {
   getTestimonial,
+  getActiveTestimonial,
   getATestimonial,
   createTestimonial,
   updateATestimonial,

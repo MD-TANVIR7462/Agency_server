@@ -14,7 +14,7 @@ const testimonialSchema = new Schema<TTestimonial>(
       type: String,
       required: [true, "Author is required."],
       minlength: [7, "Author name must be at least 7 characters long."],
-      maxlength: [25, "Name cannot exceed 25 characters."],
+      maxlength: [27, "Name cannot exceed 27 characters."],
     },
     role: {
       type: String,

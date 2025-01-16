@@ -11,7 +11,7 @@ export const validateTestimonial = z
     author: z
       .string()
       .min(7, "Author name must be at least 7 characters long.")
-      .max(25, "Author name cannot exceed 25 characters."),
+      .max(27, "Author name cannot exceed 27 characters."),
 
     role: z
       .string()
