@@ -17,7 +17,7 @@ const updateBanner = async (id: string, data: Partial<TBanner>) => {
     { $set: data },
     { new: true }
   );
-  console.log(result);
+
 
   return result;
 };

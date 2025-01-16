@@ -29,36 +29,36 @@ export const validateStory = z
         .string()
         .trim()
         .min(7, "Title must have at least 7 characters.")
-        .max(15, "Title cannot exceed 15 characters."),
+        .max(18, "Title cannot exceed 18 characters."),
       content: z
         .string()
         .trim()
         .min(90, "Content must have at least 90 characters.")
-        .max(200, "Content cannot exceed 200 characters."),
+        .max(280, "Content cannot exceed 280 characters."),
     }),
     mission: z.object({
       title: z
         .string()
         .trim()
         .min(7, "Title must have at least 7 characters.")
-        .max(15, "Title cannot exceed 15 characters."),
+        .max(18, "Title cannot exceed 18 characters."),
       content: z
         .string()
         .trim()
         .min(90, "Content must have at least 90 characters.")
-        .max(200, "Content cannot exceed 200 characters."),
+        .max(280, "Content cannot exceed 280 characters."),
     }),
     vision: z.object({
       title: z
         .string()
         .trim()
         .min(7, "Title must have at least 7 characters.")
-        .max(15, "Title cannot exceed 15 characters."),
+        .max(18, "Title cannot exceed 18 characters."),
       content: z
         .string()
         .trim()
         .min(90, "Content must have at least 90 characters.")
-        .max(200, "Content cannot exceed 200 characters."),
+        .max(280, "Content cannot exceed 280 characters."),
     }),
   })
   .strict();

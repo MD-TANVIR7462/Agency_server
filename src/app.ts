@@ -22,7 +22,6 @@ app.get("/", async (req: Request, res: Response, next) => {
   try {
     res.send("SiSCOTEk server is running!");
   } catch (err) {
-    console.log(err);
     next(err);
   }
 });

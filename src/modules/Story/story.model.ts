@@ -38,14 +38,14 @@ const storySchema = new Schema(
         required: [true, "Story title is required."],
         trim: true,
         minlength: [7, "Title must have at least 7 character."],
-        maxlength: [15, "Title cannot exceed 15 characters."],
+        maxlength: [18, "Title cannot exceed 18 characters."],
       },
       content: {
         type: String,
         required: [true, "Story content is required."],
         trim: true,
         minlength: [90, "Title must have at least 90 character."],
-        maxlength: [200, "Content cannot exceed 200 characters."],
+        maxlength: [280, "Content cannot exceed 280 characters."],
       },
     },
     mission: {
@@ -54,14 +54,14 @@ const storySchema = new Schema(
         required: [true, "Mission title is required."],
         trim: true,
         minlength: [7, "Title must have at least 7 character."],
-        maxlength: [15, "Title cannot exceed 15 characters."],
+        maxlength: [18, "Title cannot exceed 18 characters."],
       },
       content: {
         type: String,
         required: [true, "Mission content is required."],
         trim: true,
         minlength: [90, "Title must have at least 90 character."],
-        maxlength: [200, "Content cannot exceed 200 characters."],
+        maxlength: [280, "Content cannot exceed 280 characters."],
       },
     },
     vision: {
@@ -70,14 +70,14 @@ const storySchema = new Schema(
         required: [true, "Vision title is required."],
         trim: true,
         minlength: [7, "Title must have at least 7 character."],
-        maxlength: [15, "Title cannot exceed 15 characters."],
+        maxlength: [18, "Title cannot exceed 18 characters."],
       },
       content: {
         type: String,
         required: [true, "Vision content is required."],
         trim: true,
         minlength: [90, "Years must have at least 90 character."],
-        maxlength: [200, "Content cannot exceed 200 characters."],
+        maxlength: [280, "Content cannot exceed 280 characters."],
       },
     },
   },
@@ -85,5 +85,3 @@ const storySchema = new Schema(
 );
 
 export const StoryModel = model("Story", storySchema);
-
-

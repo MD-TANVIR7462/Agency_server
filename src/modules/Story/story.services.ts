@@ -6,7 +6,7 @@ const getStory = async () => {
   return result;
 };
 
-const creteStory = async (data: TStory) => {
+const createStory = async (data: TStory) => {
   const result = await StoryModel.create(data);
   return result;
 };
@@ -22,6 +22,6 @@ const updateStory = async (id: string, data: Partial<TStory>) => {
 
 export const StoryServices = {
   getStory,
-  creteStory,
+  createStory,
   updateStory,
 };
