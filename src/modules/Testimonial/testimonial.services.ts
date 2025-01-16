@@ -1,31 +1,31 @@
-import { TTechnologies } from "./testimonial.interface";
-import { TechnologyModel } from "./testimonial.model";
+import { TTestimonial } from "./testimonial.interface";
+import { TestimonialModel } from "./testimonial.model";
 
-const getTechnology = async () => {
-  const result = await TechnologyModel.find({
+const getTestimonial = async () => {
+  const result = await TestimonialModel.find({
     isActive: true,
     isDeleted: false,
   }).select("-__v");
   return result;
 };
-const getATechnology = async (id: string) => {
-  const result = await TechnologyModel.findById(id).select("-__v");
+const getATestimonial = async (id: string) => {
+  const result = await TestimonialModel.findById(id).select("-__v");
   return result;
 };
-const createTechnology = async (data: TTechnologies) => {
-  const result = await TechnologyModel.create(data);
+const createTestimonial = async (data: TTestimonial) => {
+  const result = await TestimonialModel.create(data);
   return result;
 };
-const updateATechnology = async (id: string, data: Partial<TTechnologies>) => {
-  const result = await TechnologyModel.findByIdAndUpdate(
+const updateATestimonial = async (id: string, status: boolean) => {
+  const result = await TestimonialModel.findByIdAndUpdate(
     id,
-    { $set: data },
+    { $set: { isActive: status } },
     { new: true }
   );
   return result;
 };
-const deleteATechnology = async (id: string) => {
-  const result = await TechnologyModel.findByIdAndUpdate(
+const deleteATestimonial = async (id: string) => {
+  const result = await TestimonialModel.findByIdAndUpdate(
     id,
     { $set: { isDeleted: true } },
     { new: true }
@@ -33,10 +33,10 @@ const deleteATechnology = async (id: string) => {
   return result;
 };
 
-export const TechnologyServices = {
-  getTechnology,
-  getATechnology,
-  createTechnology,
-  updateATechnology,
-  deleteATechnology,
+export const TestimonialServices = {
+  getTestimonial,
+  getATestimonial,
+  createTestimonial,
+  updateATestimonial,
+  deleteATestimonial,
 };

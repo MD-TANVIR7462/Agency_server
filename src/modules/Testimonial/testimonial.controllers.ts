@@ -1,24 +1,18 @@
 import { RequestHandler } from "express";
-import { TechnologyServices } from "./testimonial.services";
-import {
-  validateTechnology,
-  validateUpdateTechnology,
-} from "./testimonial.validation";
+import { TestimonialServices } from "./testimonial.services";
+import { validateTestimonial } from "./testimonial.validation";
+import { emptyResponse, notUpdated } from "../../utils/Respons";
 
-const getTechnology: RequestHandler = async (req, res, next) => {
+const getTestimonial: RequestHandler = async (req, res, next) => {
   try {
-    const data = await TechnologyServices.getTechnology();
+    const data = await TestimonialServices.getTestimonial();
     if (data.length <= 0) {
-      res.status(200).json({
-        success: false,
-        message: "No data found in the database.",
-        data,
-      });
+      emptyResponse(res, data);
       return;
     }
     res.status(200).json({
       success: true,
-      message: "Technologies retrieve successfully.",
+      message: "Testimonials retrieve successfully.",
       dataLength: data.length,
       data,
     });
@@ -27,21 +21,17 @@ const getTechnology: RequestHandler = async (req, res, next) => {
   }
 };
 
-const getATechnology: RequestHandler = async (req, res, next) => {
+const getATestimonial: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const data = await TechnologyServices.getATechnology(id);
+    const data = await TestimonialServices.getATestimonial(id);
     if (!data) {
-      res.status(200).json({
-        success: false,
-        message: `service not found, make sure the id:${id} is correct. `,
-        data,
-      });
+      notUpdated(res, id, data);
       return;
     }
     res.status(200).json({
       success: true,
-      message: "Technology retrieve successfully.",
+      message: "Testimonial retrieve successfully.",
       data,
     });
   } catch (err) {
@@ -49,55 +39,48 @@ const getATechnology: RequestHandler = async (req, res, next) => {
   }
 };
 
-const createTechnology: RequestHandler = async (req, res, next) => {
+const createTestimonial: RequestHandler = async (req, res, next) => {
   try {
-    const validateData = validateTechnology.parse(req.body);
-    const data = await TechnologyServices.createTechnology(validateData);
+    const validateData = validateTestimonial.parse(req.body);
+    const data = await TestimonialServices.createTestimonial(validateData);
     res.status(201).json({
       success: true,
-      message: "Technology created successfully",
+      message: "Testimonial created successfully",
       data,
     });
   } catch (err) {
     next(err);
   }
 };
-const updateATechnology: RequestHandler = async (req, res, next) => {
+const updateATestimonial: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const validateData = validateUpdateTechnology.parse(req.body);
-    const data = await TechnologyServices.updateATechnology(id, validateData);
+    const data = await TestimonialServices.updateATestimonial(id, req.body);
     if (!data) {
-      res.status(400).json({
-        success: false,
-        message: `Technology not updated, make sure the id:${id} is correct. `,
-        data,
-      });
+      notUpdated(res, id, data);
+      return;
     }
     res.status(200).json({
       success: true,
-      message: "Technology updated successfully",
+      message: "Testimonial updated successfully",
       data,
     });
   } catch (err) {
     next(err);
   }
 };
-const deleteATechnology: RequestHandler = async (req, res, next) => {
+const deleteATestimonial: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const data = await TechnologyServices.deleteATechnology(id);
+    const data = await TestimonialServices.deleteATestimonial(id);
     if (!data) {
-      res.status(400).json({
-        success: false,
-        message: `Technology not deleted, make sure the id:${id} is correct. `,
-        data,
-      });
+      notUpdated(res, id, data);
+      return;
     }
     res.status(200).json({
       success: true,
-      message: "Technology deleted successfully",
+      message: "Testimonial deleted successfully",
       data,
     });
   } catch (err) {
@@ -105,10 +88,10 @@ const deleteATechnology: RequestHandler = async (req, res, next) => {
   }
 };
 
-export const TechnologyController = {
-  getTechnology,
-  getATechnology,
-  createTechnology,
-  updateATechnology,
-  deleteATechnology,
+export const TestimonialController = {
+  getTestimonial,
+  getATestimonial,
+  createTestimonial,
+  updateATestimonial,
+  deleteATestimonial,
 };

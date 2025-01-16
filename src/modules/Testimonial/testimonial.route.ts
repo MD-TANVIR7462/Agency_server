@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { TechnologyController } from "./testimonial.controllers";
+import { TestimonialController } from "./testimonial.controllers";
+
 
 const router = Router();
-router.get("/", TechnologyController.getTechnology);
-router.get("/:id", TechnologyController.getATechnology);
-router.post("/create-technology", TechnologyController.createTechnology);
-router.patch("/update-technology/:id", TechnologyController.updateATechnology);
-router.patch("/delete-technology/:id", TechnologyController.deleteATechnology);
+router.get("/", TestimonialController.getTestimonial);
+router.get("/:id", TestimonialController.getATestimonial);
+router.post("/create-testimonial", TestimonialController.createTestimonial);
+router.patch("/update-testimonial/:id", TestimonialController.updateATestimonial);
+router.delete("/delete-testimonial/:id", TestimonialController.deleteATestimonial);
 
-export const TechnologyRoute = router;
+export const TestimonialRoute = router;
