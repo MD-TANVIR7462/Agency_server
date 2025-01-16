@@ -34,7 +34,10 @@ const getGraphicsProjects = async () => {
 };
 
 const getAProject = async (id: string) => {
-  const result = await ProjectModel.findById(id).select("-__v");
+  const result = await ProjectModel.findById(id, {
+    isActive: true,
+    isDeleted: false,
+  }).select("-__v");
   return result;
 };
 

@@ -5,6 +5,7 @@ import { TechnologyRoute } from "../modules/Technologies/technologies.route";
 import { StoryRouter } from "../modules/Story/story.route";
 import { TeamRouter } from "../modules/Team/team.route";
 import { TestimonialRoute } from "../modules/Testimonial/testimonial.route";
+import { ProjectRoute } from "../modules/Projects/projects.route";
 const router = Router();
 
 router.use("/banner", BannerRoutes);
@@ -13,4 +14,5 @@ router.use("/technologies", TechnologyRoute);
 router.use("/story", StoryRouter);
 router.use("/team", TeamRouter);
 router.use("/testimonial", TestimonialRoute);
+router.use("/project", ProjectRoute);
 export default router;

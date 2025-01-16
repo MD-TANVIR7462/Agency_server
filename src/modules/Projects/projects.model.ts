@@ -1,11 +1,12 @@
 import { Schema, model } from "mongoose";
 import { TProject } from "./projects.interface";
 
-
 const projectSchema = new Schema<TProject>(
   {
     title: {
       type: String,
+      unique: true,
+      trim: true,
       required: [true, "Title is required."],
       minlength: [3, "Title must be at least 3 characters long."],
       maxlength: [100, "Title cannot exceed 100 characters."],
