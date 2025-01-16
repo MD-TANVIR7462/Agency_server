@@ -24,10 +24,10 @@ const updateATechnology = async (id: string, data: Partial<TTechnologies>) => {
   );
   return result;
 };
-const deleteATechnology = async (id: string, status: boolean) => {
+const deleteATechnology = async (id: string) => {
   const result = await TechnologyModel.findByIdAndUpdate(
     id,
-    { $set: { isDeleted: status } },
+    { $set: { isDeleted: true } },
     { new: true }
   );
   return result;

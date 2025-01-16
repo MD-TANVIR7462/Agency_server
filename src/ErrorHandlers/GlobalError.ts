@@ -21,6 +21,7 @@ const globalError: globalError = (error, req, res, next) => {
       success: false,
       statusCode: 400,
       message,
+      errorName:error.name
     });
   }
 
@@ -32,6 +33,7 @@ const globalError: globalError = (error, req, res, next) => {
       success: false,
       statusCode: 409,
       message,
+      errorName:error?.name|| "Duplicate Error"
     });
   }
 
@@ -45,6 +47,7 @@ const globalError: globalError = (error, req, res, next) => {
       success: false,
       statusCode: 400,
       message,
+      errorName:error?.name
     });
   }
 
@@ -59,6 +62,7 @@ const globalError: globalError = (error, req, res, next) => {
       statusCode: 400,
       message,
       details: validationErrors, // Optional: include detailed errors for debugging
+      errorName:error?.name || "Validation Error"
     });
   }
 
@@ -68,6 +72,7 @@ const globalError: globalError = (error, req, res, next) => {
     statusCode,
     message,
     error: process.env.NODE_ENV === "development" ? error : undefined, // Include error details in development
+    errorName:error?.name || "Undefined"
   });
 };
 

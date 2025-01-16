@@ -1,22 +1,19 @@
 import { RequestHandler } from "express";
 import { ServiceServices } from "./service.services";
 import { validateService, validateUpdateService } from "./service.validation";
+import { emptyResponse, notUpdated } from "../../utils/Respons";
 
 const getServices: RequestHandler = async (req, res, next) => {
   try {
     const data = await ServiceServices.getServices();
     if (data.length <= 0) {
-      res.status(200).json({
-        success: false,
-        message: "No data found in the database.",
-        data,
-      });
+      emptyResponse(res, data);
       return;
     }
     res.status(200).json({
       success: true,
       message: "Services retrieve successfully.",
-      dataLength:data.length,
+      dataLength: data.length,
       data,
     });
   } catch (err) {
@@ -65,11 +62,7 @@ const updateAService: RequestHandler = async (req, res, next) => {
     const validateData = validateUpdateService.parse(req.body);
     const data = await ServiceServices.updateAService(id, validateData);
     if (!data) {
-      res.status(400).json({
-        success: false,
-        message: `service not updated, make sure the id:${id} is correct. `,
-        data,
-      });
+      notUpdated(res, id, data);
     }
     res.status(200).json({
       success: true,
@@ -84,13 +77,11 @@ const deleteAService: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const data = await ServiceServices.deleteAService(id, req.body.isDeleted as boolean);
+    const data = await ServiceServices.deleteAService(
+      id,
+    );
     if (!data) {
-      res.status(400).json({
-        success: false,
-        message: `service not deleted, make sure the id:${id} is correct. `,
-        data,
-      });
+      notUpdated(res, id, data);
     }
     res.status(200).json({
       success: true,

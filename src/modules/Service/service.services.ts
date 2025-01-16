@@ -2,7 +2,10 @@ import { TService } from "./service.interface";
 import ServiceModel from "./service.model";
 
 const getServices = async () => {
-  const result = await ServiceModel.find({ isActive: true, isDeleted: false }).select("-__v");
+  const result = await ServiceModel.find({
+    isActive: true,
+    isDeleted: false,
+  }).select("-__v");
   return result;
 };
 const getAService = async (id: string) => {
@@ -21,10 +24,10 @@ const updateAService = async (id: string, data: Partial<TService>) => {
   );
   return result;
 };
-const deleteAService = async (id: string, status: boolean) => {
+const deleteAService = async (id: string) => {
   const result = await ServiceModel.findByIdAndUpdate(
     id,
-    { $set: { isDeleted: status } },
+    { $set: { isDeleted: true } },
     { new: true }
   );
   return result;

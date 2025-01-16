@@ -19,7 +19,7 @@ const getTechnology: RequestHandler = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: "Technologies retrieve successfully.",
-      dataLength:data.length,
+      dataLength: data.length,
       data,
     });
   } catch (err) {
@@ -87,10 +87,7 @@ const deleteATechnology: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const data = await TechnologyServices.deleteATechnology(
-      id,
-      req.body.isDeleted as boolean
-    );
+    const data = await TechnologyServices.deleteATechnology(id);
     if (!data) {
       res.status(400).json({
         success: false,
