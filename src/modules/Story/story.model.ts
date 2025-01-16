@@ -84,6 +84,6 @@ const storySchema = new Schema(
   { timestamps: true }
 );
 
-const StoryModel = model("Story", storySchema);
+export const StoryModel = model("Story", storySchema);
 
-export default StoryModel;
+
