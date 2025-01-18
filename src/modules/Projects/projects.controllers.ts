@@ -1,12 +1,12 @@
 import { RequestHandler } from "express";
 
-import { validateProject } from "./projects.validation";
+import { validateProject, validateUpdateProject } from "./projects.validation";
 import { emptyResponse, notUpdated } from "../../utils/Respons";
 import { ProjectServices } from "./projects.services";
 
 const getProjects: RequestHandler = async (req, res, next) => {
   try {
-    const {variant}=req.query
+    const { variant } = req.query;
     const data = await ProjectServices.getProjects(variant as string);
     if (data.length <= 0) {
       emptyResponse(res, data);
@@ -58,7 +58,8 @@ const createProject: RequestHandler = async (req, res, next) => {
 const updateAProject: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const data = await ProjectServices.updateAProject(id, req.body);
+    const updateData = validateUpdateProject.parse(req.body);
+    const data = await ProjectServices.updateAProject(id, updateData);
     if (!data) {
       notUpdated(res, id, data);
       return;
