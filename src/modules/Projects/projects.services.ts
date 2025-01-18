@@ -1,40 +1,18 @@
 import { TProject } from "./projects.interface";
 import { ProjectModel } from "./projects.model";
 
-const getProjects = async () => {
-  const result = await ProjectModel.find({
+const getProjects = async (variant?: string) => {
+  const query: Record<string, any> = {
     isActive: true,
     isDeleted: false,
-  }).select("-isDeleted -__v");
+  };
+  if (variant !== undefined) {
+    query.category = variant;
+  }
+  const result = await ProjectModel.find(query).select("-isDeleted -__v");
   return result;
 };
 
-const getWebProjects = async () => {
-  const result = await ProjectModel.find({
-    isActive: true,
-    isDeleted: false,
-    category: "Web Development",
-  }).select("-__v");
-  return result;
-};
-
-const getAppProjects = async () => {
-  const result = await ProjectModel.find({
-    isActive: true,
-    isDeleted: false,
-    category: "Web Apps",
-  }).select("-__v");
-  return result;
-};
-
-const getGraphicsProjects = async () => {
-  const result = await ProjectModel.find({
-    isActive: true,
-    isDeleted: false,
-    category: "Graphics",
-  }).select("-__v");
-  return result;
-};
 
 const getAProject = async (id: string) => {
   const result = await ProjectModel.findOne({
@@ -71,9 +49,6 @@ const deleteAProject = async (id: string) => {
 
 export const ProjectServices = {
   getProjects,
-  getWebProjects,
-  getAppProjects,
-  getGraphicsProjects,
   getAProject,
   createProject,
   updateAProject,

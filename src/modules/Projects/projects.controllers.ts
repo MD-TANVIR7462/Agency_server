@@ -6,58 +6,8 @@ import { ProjectServices } from "./projects.services";
 
 const getProjects: RequestHandler = async (req, res, next) => {
   try {
-    const data = await ProjectServices.getProjects();
-    if (data.length <= 0) {
-      emptyResponse(res, data);
-      return;
-    }
-    res.status(200).json({
-      success: true,
-      message: "Projects retrieved successfully.",
-      dataLength: data.length,
-      data,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-const getWebProjects: RequestHandler = async (req, res, next) => {
-  try {
-    const data = await ProjectServices.getWebProjects();
-    if (data.length <= 0) {
-      emptyResponse(res, data);
-      return;
-    }
-    res.status(200).json({
-      success: true,
-      message: "Projects retrieved successfully.",
-      dataLength: data.length,
-      data,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-const getAppProjects: RequestHandler = async (req, res, next) => {
-  try {
-    const data = await ProjectServices.getAppProjects();
-    if (data.length <= 0) {
-      emptyResponse(res, data);
-      return;
-    }
-    res.status(200).json({
-      success: true,
-      message: "Projects retrieved successfully.",
-      dataLength: data.length,
-      data,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-const getGraphicsProjects: RequestHandler = async (req, res, next) => {
-  try {
-    const data = await ProjectServices.getGraphicsProjects();
+    const {variant}=req.query
+    const data = await ProjectServices.getProjects(variant as string);
     if (data.length <= 0) {
       emptyResponse(res, data);
       return;
@@ -144,9 +94,6 @@ const deleteAProject: RequestHandler = async (req, res, next) => {
 
 export const ProjectController = {
   getProjects,
-  getWebProjects,
-  getAppProjects,
-  getGraphicsProjects,
   getAProject,
   createProject,
   updateAProject,

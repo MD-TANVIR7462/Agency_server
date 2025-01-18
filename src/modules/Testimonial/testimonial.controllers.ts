@@ -5,24 +5,8 @@ import { emptyResponse, notUpdated } from "../../utils/Respons";
 
 const getTestimonial: RequestHandler = async (req, res, next) => {
   try {
-    const data = await TestimonialServices.getTestimonial();
-    if (data.length <= 0) {
-      emptyResponse(res, data);
-      return;
-    }
-    res.status(200).json({
-      success: true,
-      message: "Testimonials retrieve successfully.",
-      dataLength: data.length,
-      data,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-const getActiveTestimonial: RequestHandler = async (req, res, next) => {
-  try {
-    const data = await TestimonialServices.getActiveTestimonial();
+    const { status } = req.query;
+    const data = await TestimonialServices.getTestimonial(status as string);
     if (data.length <= 0) {
       emptyResponse(res, data);
       return;
@@ -107,7 +91,6 @@ const deleteATestimonial: RequestHandler = async (req, res, next) => {
 
 export const TestimonialController = {
   getTestimonial,
-  getActiveTestimonial,
   getATestimonial,
   createTestimonial,
   updateATestimonial,

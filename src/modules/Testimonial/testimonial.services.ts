@@ -1,17 +1,15 @@
 import { TTestimonial } from "./testimonial.interface";
 import { TestimonialModel } from "./testimonial.model";
 
-const getTestimonial = async () => {
-  const result = await TestimonialModel.find().select("-__v");
+const getTestimonial = async (status?: string) => {
+  const query: any = {};
+  if (status !== undefined) {
+    query.isActive = status;
+  }
+  const result = await TestimonialModel.find(query).select("-__v");
   return result;
 };
-const getActiveTestimonial = async () => {
-  const result = await TestimonialModel.find({
-    isActive: true,
-    isDeleted: false,
-  }).select("-__v");
-  return result;
-};
+
 const getATestimonial = async (id: string) => {
   const result = await TestimonialModel.findOne({
     _id: id,
@@ -35,7 +33,7 @@ const updateATestimonial = async (id: string, data: Partial<TTestimonial>) => {
 const deleteATestimonial = async (id: string) => {
   const result = await TestimonialModel.findByIdAndUpdate(
     id,
-    { $set: { isDeleted: true } },
+    { $set: { isDeleted: true, isActive: false } },
     { new: true }
   );
   return result;
@@ -43,7 +41,6 @@ const deleteATestimonial = async (id: string) => {
 
 export const TestimonialServices = {
   getTestimonial,
-  getActiveTestimonial,
   getATestimonial,
   createTestimonial,
   updateATestimonial,
