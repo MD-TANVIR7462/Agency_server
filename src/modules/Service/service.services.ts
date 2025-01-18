@@ -9,7 +9,11 @@ const getServices = async () => {
   return result;
 };
 const getAService = async (id: string) => {
-  const result = await ServiceModel.findById(id).select("-__v");
+  const result = await ServiceModel.findOne({
+    _id:id,
+    isActive:true,
+    isDeleted:false
+  }).select("-__v");
   return result;
 };
 const createService = async (data: TService) => {

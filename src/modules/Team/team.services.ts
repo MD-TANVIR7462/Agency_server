@@ -9,7 +9,11 @@ const getTeam = async () => {
   return result;
 };
 const getATeam = async (id: string) => {
-  const result = await TeamModel.findById(id).select("-__v");
+  const result = await TeamModel.findOne({
+    _id: id,
+    isActive: true,
+    isDeleted: false,
+  }).select("-__v");
   return result;
 };
 const createTeam = async (data: TTeam) => {

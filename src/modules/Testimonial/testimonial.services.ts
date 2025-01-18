@@ -13,7 +13,11 @@ const getActiveTestimonial = async () => {
   return result;
 };
 const getATestimonial = async (id: string) => {
-  const result = await TestimonialModel.findById(id).select("-__v");
+  const result = await TestimonialModel.findOne({
+    _id: id,
+    isActive: true,
+    isDeleted: false,
+  }).select("-__v");
   return result;
 };
 const createTestimonial = async (data: TTestimonial) => {

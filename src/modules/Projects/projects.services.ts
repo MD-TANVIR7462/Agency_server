@@ -5,9 +5,10 @@ const getProjects = async () => {
   const result = await ProjectModel.find({
     isActive: true,
     isDeleted: false,
-  }).select("-__v");
+  }).select("-isDeleted -__v");
   return result;
 };
+
 const getWebProjects = async () => {
   const result = await ProjectModel.find({
     isActive: true,
@@ -16,6 +17,7 @@ const getWebProjects = async () => {
   }).select("-__v");
   return result;
 };
+
 const getAppProjects = async () => {
   const result = await ProjectModel.find({
     isActive: true,
@@ -24,6 +26,7 @@ const getAppProjects = async () => {
   }).select("-__v");
   return result;
 };
+
 const getGraphicsProjects = async () => {
   const result = await ProjectModel.find({
     isActive: true,
@@ -34,10 +37,12 @@ const getGraphicsProjects = async () => {
 };
 
 const getAProject = async (id: string) => {
-  const result = await ProjectModel.findById(id, {
+  const result = await ProjectModel.findOne({
+    _id: id,
     isActive: true,
     isDeleted: false,
-  }).select("-__v");
+  }).select("-__v -isDeleted");
+  console.log(result);
   return result;
 };
 
@@ -58,7 +63,7 @@ const updateAProject = async (id: string, data: Partial<TProject>) => {
 const deleteAProject = async (id: string) => {
   const result = await ProjectModel.findByIdAndUpdate(
     id,
-    { $set: { isDeleted: true } },
+    { $set: { isDeleted: true, isActive: false } },
     { new: true }
   );
   return result;

@@ -9,7 +9,11 @@ const getTechnology = async () => {
   return result;
 };
 const getATechnology = async (id: string) => {
-  const result = await TechnologyModel.findById(id).select("-__v");
+  const result = await TechnologyModel.findOne({
+    _id: id,
+    isActive: true,
+    isDeleted: false,
+  }).select("-__v");
   return result;
 };
 const createTechnology = async (data: TTechnologies) => {
