@@ -6,7 +6,7 @@ const getTestimonial = async (status?: string) => {
   if (status !== undefined) {
     query.isActive = status;
   }
-  const result = await TestimonialModel.find(query).select("-__v");
+  const result = await TestimonialModel.find(query).select("-__v -isDeleted");
   return result;
 };
 
@@ -15,7 +15,7 @@ const getATestimonial = async (id: string) => {
     _id: id,
     isActive: true,
     isDeleted: false,
-  }).select("-__v");
+  }).select("-__v -isDeleted");
   return result;
 };
 const createTestimonial = async (data: TTestimonial) => {
