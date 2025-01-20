@@ -24,6 +24,6 @@ const ContactSchema = new Schema<TContact>({
     type: Boolean,
     default: false,
   },
-});
+},{timestamps:true});
 
 export const ContactModel = model<TContact>("Contact", ContactSchema);

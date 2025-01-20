@@ -28,6 +28,6 @@ const gallerySchema = new Schema<TGallery>({
     required: false,
     default: false,
   },
-});
+},{timestamps:true});
 
 export const GalleryModel = model<TGallery>("Gallery", gallerySchema);

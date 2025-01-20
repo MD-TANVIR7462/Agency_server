@@ -38,6 +38,6 @@ const SettingsSchema = new Schema<TSettings>({
     required: false,
     default: "",
   },
-});
+},{timestamps:true});
 
 export const SettingsModel = model<TSettings>("Settings", SettingsSchema);

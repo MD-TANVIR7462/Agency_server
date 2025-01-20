@@ -10,6 +10,7 @@ import { FaqRoute } from "../modules/Faq/faq.route";
 import { GalleryRoute } from "../modules/Gallery/gallery.route";
 import { ContactRoute } from "../modules/Contact/contact.route";
 import { SettingsRoute } from "../modules/WebSettings/settings.route";
+import { PositionRoute } from "../modules/OpenPosition/position.route";
 const router = Router();
 
 router.use("/banner", BannerRoutes);
@@ -23,4 +24,5 @@ router.use("/faq", FaqRoute);
 router.use("/gallery", GalleryRoute);
 router.use("/contact", ContactRoute);
 router.use("/settings", SettingsRoute);
+router.use("/position", PositionRoute);
 export default router;
