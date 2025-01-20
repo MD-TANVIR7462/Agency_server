@@ -1,18 +1,18 @@
 import { RequestHandler } from "express";
 import { emptyResponse, notUpdated } from "../../utils/Respons";
-import { validateFaq, validateUpdateFaq } from "./gallery.validation";
-import { FaqServices } from "./gallery.servieces";
+import { GalleryServices } from "./gallery.services";
+import { validateGallery, validateUpdateGallery } from "./gallery.validation";
 
-const getFaq: RequestHandler = async (req, res, next) => {
+const getGallery: RequestHandler = async (req, res, next) => {
   try {
-    const data = await FaqServices.getFaqs();
+    const data = await GalleryServices.getGallery();
     if (data.length <= 0) {
       emptyResponse(res, data);
       return;
     }
     res.status(200).json({
       success: true,
-      message: "Faq's retrieved successfully.",
+      message: "Gallery's retrieved successfully.",
       dataLength: data.length,
       data,
     });
@@ -21,17 +21,17 @@ const getFaq: RequestHandler = async (req, res, next) => {
   }
 };
 
-const getAFaq: RequestHandler = async (req, res, next) => {
+const getAGallery: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const data = await FaqServices.getAFaq(id);
+    const data = await GalleryServices.getAGallery(id);
     if (!data) {
       notUpdated(res, id, data);
       return;
     }
     res.status(200).json({
       success: true,
-      message: "Faq retrieved successfully.",
+      message: "Gallery retrieved successfully.",
       data,
     });
   } catch (err) {
@@ -39,13 +39,13 @@ const getAFaq: RequestHandler = async (req, res, next) => {
   }
 };
 
-const createFaq: RequestHandler = async (req, res, next) => {
+const createGallery: RequestHandler = async (req, res, next) => {
   try {
-    const validateData = validateFaq.parse(req.body);
-    const data = await FaqServices.createFaq(validateData);
+    const validateData = validateGallery.parse(req.body);
+    const data = await GalleryServices.createGallery(validateData);
     res.status(201).json({
       success: true,
-      message: "Faq created successfully.",
+      message: "Gallery created successfully.",
       data,
     });
   } catch (err) {
@@ -53,18 +53,18 @@ const createFaq: RequestHandler = async (req, res, next) => {
   }
 };
 
-const updateAFaq: RequestHandler = async (req, res, next) => {
+const updateAGallery: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const validateData = validateUpdateFaq.parse(req.body);
-    const data = await FaqServices.updateAFaq(id, validateData);
+    const validateData = validateUpdateGallery.parse(req.body);
+    const data = await GalleryServices.updateAGallery(id, validateData);
     if (!data) {
       notUpdated(res, id, data);
       return;
     }
     res.status(200).json({
       success: true,
-      message: "Faq updated successfully.",
+      message: "Gallery updated successfully.",
       data,
     });
   } catch (err) {
@@ -72,17 +72,17 @@ const updateAFaq: RequestHandler = async (req, res, next) => {
   }
 };
 
-const deleteAFaq: RequestHandler = async (req, res, next) => {
+const deleteAGallery: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const data = await FaqServices.deleteAFaq(id);
+    const data = await GalleryServices.deleteAGallery(id);
     if (!data) {
       notUpdated(res, id, data);
       return;
     }
     res.status(200).json({
       success: true,
-      message: "Faq deleted successfully.",
+      message: "Gallery deleted successfully.",
       data,
     });
   } catch (err) {
@@ -90,10 +90,10 @@ const deleteAFaq: RequestHandler = async (req, res, next) => {
   }
 };
 
-export const FaqController = {
-  getFaq,
-  getAFaq,
-  createFaq,
-  updateAFaq,
-  deleteAFaq,
+export const GalleryController = {
+  getGallery,
+  getAGallery,
+  createGallery,
+  updateAGallery,
+  deleteAGallery,
 };

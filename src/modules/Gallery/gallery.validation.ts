@@ -1,18 +1,12 @@
 import { z } from "zod";
 
-export const validateFaq = z
-  .object({
-    answer: z
-      .string()
-      .min(10, "Question must be at least 10 characters long")
-      .max(160, "Question cannot exceed 120 characters."),
-    question: z
-      .string()
-      .min(10, "Answer must be al least 10 characters long")
-      .max(250, "Answer cannot exceed 250 characters."),
-    isActive: z.boolean().optional().default(true),
-    isDeleted: z.boolean().optional().default(false),
-  })
-  .strict();
-
-export const validateUpdateFaq = validateFaq.partial();
+export const validateGallery = z.object({
+  caption: z
+    .string()
+    .min(10, "Caption must be at least 10 characters")
+    .max(60, "Caption Cannot exceed 60 characters"),
+  url: z.string().url("Link must be a valid URL"),
+  isActive: z.boolean().default(true).optional(),
+  isDeleted: z.boolean().default(false).optional(),
+});
+export const validateUpdateGallery = validateGallery.partial();

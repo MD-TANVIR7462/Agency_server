@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { FaqController } from "./gallery.controllers";
+import { GalleryController } from "./gallery.controllers";
 
 const router = Router();
 
-router.get("/", FaqController.getFaq);
-router.get("/:id", FaqController.getAFaq);
-router.post("/create-faq", FaqController.createFaq);
-router.patch("/update-faq/:id", FaqController.updateAFaq);
-router.delete("/delete-faq/:id", FaqController.deleteAFaq);
+router.get("/", GalleryController.getGallery);
+router.get("/:id", GalleryController.getAGallery);
+router.post("/create-gallery", GalleryController.createGallery);
+router.patch("/update-gallery/:id", GalleryController.updateAGallery);
+router.delete("/delete-gallery/:id", GalleryController.deleteAGallery);
 
-export const FaqRoute = router
+export const GalleryRoute = router;

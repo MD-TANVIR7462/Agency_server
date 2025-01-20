@@ -7,6 +7,7 @@ import { TeamRouter } from "../modules/Team/team.route";
 import { TestimonialRoute } from "../modules/Testimonial/testimonial.route";
 import { ProjectRoute } from "../modules/Projects/projects.route";
 import { FaqRoute } from "../modules/Faq/faq.route";
+import { GalleryRoute } from "../modules/Gallery/gallery.route";
 const router = Router();
 
 router.use("/banner", BannerRoutes);
@@ -17,4 +18,5 @@ router.use("/team", TeamRouter);
 router.use("/testimonial", TestimonialRoute);
 router.use("/project", ProjectRoute);
 router.use("/faq", FaqRoute);
+router.use("/gallery", GalleryRoute);
 export default router;

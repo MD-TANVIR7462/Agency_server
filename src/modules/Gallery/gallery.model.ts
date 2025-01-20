@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 import { TGallery } from "./gallery.interface";
 
 const gallerySchema = new Schema<TGallery>({
@@ -29,3 +29,5 @@ const gallerySchema = new Schema<TGallery>({
     default: false,
   },
 });
+
+export const GalleryModel = model<TGallery>("Gallery", gallerySchema);
