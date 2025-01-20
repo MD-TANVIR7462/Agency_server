@@ -14,7 +14,7 @@ const faqSchema = new Schema<TFaq>(
       type: String,
       trim: true,
       required: [true, "Answer is required"],
-      minlength: [15, "Answer must be al least 15 characters long"],
+      minlength: [10, "Answer must be al least 15 characters long"],
       maxlength: [250, "Answer cannot exceed 250 characters."],
     },
     isActive: {

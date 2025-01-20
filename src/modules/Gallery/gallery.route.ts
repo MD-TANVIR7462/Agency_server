@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { FaqController } from "./faq.controllers";
+import { FaqController } from "./gallery.controllers";
 
 const router = Router();
 

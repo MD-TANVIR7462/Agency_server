@@ -20,7 +20,7 @@ app.use('/api/v1',router)
 
 app.get("/", async (req: Request, res: Response, next) => {
   try {
-    res.send("SiSCOTEk server is running!");
+    res.send("Agency server is running!");
   } catch (err) {
     next(err);
   }

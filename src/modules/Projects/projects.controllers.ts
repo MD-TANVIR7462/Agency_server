@@ -6,8 +6,8 @@ import { ProjectServices } from "./projects.services";
 
 const getProjects: RequestHandler = async (req, res, next) => {
   try {
-    const { variant } = req.query;
-    const data = await ProjectServices.getProjects(variant as string);
+    const { category } = req.query;
+    const data = await ProjectServices.getProjects(category as string);
     if (data.length <= 0) {
       emptyResponse(res, data);
       return;
