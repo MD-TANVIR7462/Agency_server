@@ -4,7 +4,7 @@ const ContactSchema = new Schema<TContact>({
   email: {
     type: String,
     required: true,
-    match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, 
+    match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   },
   phone: {
     type: String,
