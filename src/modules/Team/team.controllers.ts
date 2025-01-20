@@ -76,11 +76,7 @@ const updateATeam: RequestHandler = async (req, res, next) => {
 const deleteATeam: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
-
-    const data = await TeamServices.deleteATeam(
-      id,
-
-    );
+    const data = await TeamServices.deleteATeam(id);
     if (!data) {
       notUpdated(res, id, data);
     }

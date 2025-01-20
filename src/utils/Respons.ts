@@ -15,3 +15,11 @@ export const notUpdated = (res: Response, id: string, data: any) => {
     data,
   });
 };
+
+export const alreadyExist = (res: Response, data: any) => {
+  res.status(401).json({
+    success: false,
+    message: `You Can't create another document`,
+    data,
+  });
+};

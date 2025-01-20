@@ -24,16 +24,32 @@ export const validateTeam = z
       .object({
         linkedin: z
           .string()
-          .url("Invalid LinkedIn URL.")
+          .refine(value => value === "" || /^https?:\/\/(www\.)?linkedin\.com\/.+$/, {
+            message: "Invalid LinkedIn URL or empty string."
+          })
           .optional()
           .default(""),
-        twitter: z.string().url("Invalid Twitter URL.").optional().default(""),
+        twitter: z
+          .string()
+          .refine(value => value === "" || /^https?:\/\/(www\.)?twitter\.com\/.+$/, {
+            message: "Invalid Twitter URL or empty string."
+          })
+          .optional()
+          .default(""),
         facebook: z
           .string()
-          .url("Invalid Facebook URL.")
+          .refine(value => value === "" || /^https?:\/\/(www\.)?facebook\.com\/.+$/, {
+            message: "Invalid Facebook URL or empty string."
+          })
           .optional()
           .default(""),
-        github: z.string().url("Invalid GitHub URL.").optional().default(""),
+        github: z
+          .string()
+          .refine(value => value === "" || /^https?:\/\/(www\.)?github\.com\/.+$/, {
+            message: "Invalid GitHub URL or empty string."
+          })
+          .optional()
+          .default(""),
       })
       .optional(),
     skills: z

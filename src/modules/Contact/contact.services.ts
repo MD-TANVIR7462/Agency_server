@@ -10,6 +10,10 @@ const getContact = async () => {
 };
 
 const createContact = async (data: TContact) => {
+  const validate = await ContactModel.find();
+  if (validate.length > 0) {
+    return null;
+  }
   const result = await ContactModel.create(data);
   return result;
 };

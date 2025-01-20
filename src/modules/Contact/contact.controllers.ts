@@ -1,8 +1,7 @@
 import { RequestHandler } from "express";
-import { emptyResponse, notUpdated } from "../../utils/Respons";
+import { alreadyExist, emptyResponse, notUpdated } from "../../utils/Respons";
 import { ContactServices } from "./contact.services";
 import { validateContact, validateUpdateContact } from "./contact.validation";
-
 
 const getContact: RequestHandler = async (req, res, next) => {
   try {
@@ -22,11 +21,14 @@ const getContact: RequestHandler = async (req, res, next) => {
   }
 };
 
-
 const createContact: RequestHandler = async (req, res, next) => {
   try {
     const validateData = validateContact.parse(req.body);
     const data = await ContactServices.createContact(validateData);
+    if (!data) {
+      alreadyExist(res, data);
+      return;
+    }
     res.status(201).json({
       success: true,
       message: "Contact created successfully.",
@@ -55,7 +57,6 @@ const updateAContact: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
-
 
 export const ContactController = {
   getContact,

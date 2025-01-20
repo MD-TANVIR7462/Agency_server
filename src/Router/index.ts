@@ -9,6 +9,7 @@ import { ProjectRoute } from "../modules/Projects/projects.route";
 import { FaqRoute } from "../modules/Faq/faq.route";
 import { GalleryRoute } from "../modules/Gallery/gallery.route";
 import { ContactRoute } from "../modules/Contact/contact.route";
+import { SettingsRoute } from "../modules/WebSettings/settings.route";
 const router = Router();
 
 router.use("/banner", BannerRoutes);
@@ -21,4 +22,5 @@ router.use("/project", ProjectRoute);
 router.use("/faq", FaqRoute);
 router.use("/gallery", GalleryRoute);
 router.use("/contact", ContactRoute);
+router.use("/settings", SettingsRoute);
 export default router;
