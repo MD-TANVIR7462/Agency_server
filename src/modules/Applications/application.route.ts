@@ -1,13 +1,12 @@
 import { Router } from "express";
 import { ApplicationController } from "./application.controller";
 
-
-
 const router = Router();
 router.get("/", ApplicationController.getApplications);
 router.get("/:id", ApplicationController.getAnApplication);
-router.post("/create-Position", ApplicationController.createApplication);
-router.patch("/update-Position/:id", ApplicationController.updateAnApplication);
-router.delete("/delete-Position/:id", ApplicationController.deleteAnApplication);
+router.post("/create-application", ApplicationController.createApplication);
+router.patch("/select/:id", ApplicationController.deleteAnApplication);
+router.patch("/reject/:id", ApplicationController.deleteAnApplication);
+router.delete("/delete-application/:id",ApplicationController.deleteAnApplication);
 
 export const PositionRoute = router;

@@ -57,25 +57,6 @@ const createApplication: RequestHandler = async (req, res, next) => {
   }
 };
 
-const updateAnApplication: RequestHandler = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const updateData = validateUpdateApplication.parse(req.body);
-    const data = await ApplicationServices.updateAnApplication(id, updateData);
-    if (!data) {
-      notUpdated(res, id, data);
-      return;
-    }
-    res.status(200).json({
-      success: true,
-      message: "Application updated successfully.",
-      data,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
 const deleteAnApplication: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -99,6 +80,5 @@ export const ApplicationController = {
   getApplications,
   getAnApplication,
   createApplication,
-  updateAnApplication,
   deleteAnApplication,
 };

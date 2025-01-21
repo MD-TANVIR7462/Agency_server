@@ -22,15 +22,6 @@ const createApplication = async (data: TApplication) => {
   return result;
 };
 
-const updateAnApplication = async (id: string, data: Partial<TApplication>) => {
-  const result = await ApplicationModel.findByIdAndUpdate(
-    id,
-    { $set: data },
-    { new: true }
-  );
-  return result;
-};
-
 const deleteAnApplication = async (id: string) => {
   const result = await ApplicationModel.findByIdAndDelete(id);
   return result;
@@ -40,6 +31,5 @@ export const ApplicationServices = {
   getApplications,
   getAnApplication,
   createApplication,
-  updateAnApplication,
   deleteAnApplication,
 };
