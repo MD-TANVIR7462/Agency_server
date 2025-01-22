@@ -18,15 +18,27 @@ const getAnApplication = async (id: string) => {
 };
 
 const createApplication = async (data: TApplication) => {
-  console.log(data);
   const result = await ApplicationModel.create(data);
   return result;
 };
 
 const selectApplication = async (id: string) => {
-  const result = await ApplicationModel.findByIdAndUpdate(id, {
-    $set: { isSelected: true,isPending:false,isRejected:false},
-  });
+  const application = await ApplicationModel.findById(id);
+  if (!application) {
+    return null;
+  }
+  const updatedResult = await ApplicationModel.findByIdAndUpdate(
+    id,
+    {
+      $set: {
+        isSelected: !application.isSelected,
+        isPending: !application.isPending,
+        isRejected: false,
+      },
+    },
+    { new: true }
+  );
+  return updatedResult;
 };
 
 const deleteAnApplication = async (id: string) => {
@@ -39,4 +51,5 @@ export const ApplicationServices = {
   getAnApplication,
   createApplication,
   deleteAnApplication,
+  selectApplication,
 };

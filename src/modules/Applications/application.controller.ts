@@ -57,9 +57,21 @@ const createApplication: RequestHandler = async (req, res, next) => {
 };
 
 const selectApplication: RequestHandler = async (req, res, next) => {
-
-
-  
+  try {
+    const { id } = req.params;
+    const data = await ApplicationServices.selectApplication(id);
+    if (!data) {
+      notUpdated(res, id, data);
+      return;
+    }
+    res.status(200).json({
+      success: true,
+      message: "Application deleted successfully.",
+      data,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 const deleteAnApplication: RequestHandler = async (req, res, next) => {
@@ -86,4 +98,5 @@ export const ApplicationController = {
   getAnApplication,
   createApplication,
   deleteAnApplication,
+  selectApplication
 };
