@@ -41,6 +41,25 @@ const selectApplication = async (id: string) => {
   return updatedResult;
 };
 
+const rejectApplication = async (id: string) => {
+  const application = await ApplicationModel.findById(id);
+  if (!application) {
+    return null;
+  }
+  const updatedResult = await ApplicationModel.findByIdAndUpdate(
+    id,
+    {
+      $set: {
+        isPending: !application.isPending,
+        isRejected: !application.isRejected,
+        isSelected: false,
+      },
+    },
+    { new: true }
+  );
+  return updatedResult;
+};
+
 const deleteAnApplication = async (id: string) => {
   const result = await ApplicationModel.findByIdAndDelete(id);
   return result;
@@ -52,4 +71,5 @@ export const ApplicationServices = {
   createApplication,
   deleteAnApplication,
   selectApplication,
+  rejectApplication,
 };

@@ -6,7 +6,7 @@ router.get("/", ApplicationController.getApplications);
 router.get("/:id", ApplicationController.getAnApplication);
 router.post("/create-application", ApplicationController.createApplication);
 router.patch("/select/:id", ApplicationController.selectApplication);
-router.patch("/reject/:id", ApplicationController.deleteAnApplication);
+router.patch("/reject/:id", ApplicationController.rejectApplication);
 router.delete("/delete-application/:id",ApplicationController.deleteAnApplication);
 
 export const ApplicationRoute = router;

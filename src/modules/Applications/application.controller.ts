@@ -66,7 +66,24 @@ const selectApplication: RequestHandler = async (req, res, next) => {
     }
     res.status(200).json({
       success: true,
-      message: "Application deleted successfully.",
+      message: "Candidate Selected.",
+      data,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+const rejectApplication: RequestHandler = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const data = await ApplicationServices.rejectApplication(id);
+    if (!data) {
+      notUpdated(res, id, data);
+      return;
+    }
+    res.status(200).json({
+      success: true,
+      message: "Candidate Rejected.",
       data,
     });
   } catch (err) {
@@ -98,5 +115,6 @@ export const ApplicationController = {
   getAnApplication,
   createApplication,
   deleteAnApplication,
-  selectApplication
+  selectApplication,
+  rejectApplication
 };
