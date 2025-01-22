@@ -42,10 +42,6 @@ const getAnApplication: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
-
-
-
-
 const createApplication: RequestHandler = async (req, res, next) => {
   try {
     const validateData = validateApplication.parse(req.body);
@@ -58,6 +54,12 @@ const createApplication: RequestHandler = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+const selectApplication: RequestHandler = async (req, res, next) => {
+
+
+  
 };
 
 const deleteAnApplication: RequestHandler = async (req, res, next) => {

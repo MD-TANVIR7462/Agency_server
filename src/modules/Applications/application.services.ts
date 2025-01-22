@@ -23,6 +23,12 @@ const createApplication = async (data: TApplication) => {
   return result;
 };
 
+const selectApplication = async (id: string) => {
+  const result = await ApplicationModel.findByIdAndUpdate(id, {
+    $set: { isSelected: true,isPending:false,isRejected:false},
+  });
+};
+
 const deleteAnApplication = async (id: string) => {
   const result = await ApplicationModel.findByIdAndDelete(id);
   return result;
