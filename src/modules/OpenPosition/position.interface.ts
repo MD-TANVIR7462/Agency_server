@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
 
 export type TPosition = {
-  applicationID?: Types.ObjectId[];
+  applications?: Types.ObjectId[];
   title: string;
   department: string;
   location: string;

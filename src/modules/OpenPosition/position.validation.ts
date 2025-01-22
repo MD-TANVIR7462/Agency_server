@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const validatePosition = z
   .object({
-    applicationID: z.array(z.string()).optional().default([]),
+    applications: z.array(z.string()).optional().default([]),
     title: z
       .string()
       .min(3, "Title must be at least 3 characters long.")

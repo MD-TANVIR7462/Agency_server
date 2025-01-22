@@ -43,6 +43,9 @@ const getAnApplication: RequestHandler = async (req, res, next) => {
   }
 };
 
+
+
+
 const createApplication: RequestHandler = async (req, res, next) => {
   try {
     const validateData = validateApplication.parse(req.body);

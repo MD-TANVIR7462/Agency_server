@@ -3,7 +3,7 @@ import { TPosition } from "./position.interface";
 
 const PositionSchema = new Schema<TPosition>(
   {
-    applicationID: {
+    applications: {
       type: [Schema.Types.ObjectId],
       required: false,
       default: [],
