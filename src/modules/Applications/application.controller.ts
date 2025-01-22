@@ -9,9 +9,8 @@ import { ApplicationServices } from "./application.services";
 
 const getApplications: RequestHandler = async (req, res, next) => {
   try {
-    const status = req.query;
-    console.log(status)
-    const data = await ApplicationServices.getApplications(status);
+    const queryData = req.query;
+    const data = await ApplicationServices.getApplications(queryData);
     if (data.length <= 0) {
       emptyResponse(res, data);
       return;
