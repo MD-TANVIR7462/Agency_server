@@ -9,7 +9,9 @@ import { ApplicationServices } from "./application.services";
 
 const getApplications: RequestHandler = async (req, res, next) => {
   try {
-    const data = await ApplicationServices.getApplications();
+    const status = req.query;
+    console.log(status)
+    const data = await ApplicationServices.getApplications(status);
     if (data.length <= 0) {
       emptyResponse(res, data);
       return;
@@ -116,5 +118,5 @@ export const ApplicationController = {
   createApplication,
   deleteAnApplication,
   selectApplication,
-  rejectApplication
+  rejectApplication,
 };

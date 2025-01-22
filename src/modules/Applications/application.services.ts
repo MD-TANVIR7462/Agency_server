@@ -1,9 +1,10 @@
 import { TApplication } from "./application.interface";
 import { ApplicationModel } from "./application.model";
 
-const getApplications = async () => {
+const getApplications = async ( status : any) => {
   const query: Record<string, any> = {
     isDeleted: false,
+    ...status
   };
   const result = await ApplicationModel.find(query).select("-isDeleted -__v");
   return result;
