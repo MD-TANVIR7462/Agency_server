@@ -11,6 +11,7 @@ import { GalleryRoute } from "../modules/Gallery/gallery.route";
 import { ContactRoute } from "../modules/Contact/contact.route";
 import { SettingsRoute } from "../modules/WebSettings/settings.route";
 import { PositionRoute } from "../modules/OpenPosition/position.route";
+import { ApplicationRoute } from "../modules/Applications/application.route";
 const router = Router();
 
 router.use("/banner", BannerRoutes);
@@ -25,4 +26,5 @@ router.use("/gallery", GalleryRoute);
 router.use("/contact", ContactRoute);
 router.use("/settings", SettingsRoute);
 router.use("/position", PositionRoute);
+router.use("/application", ApplicationRoute);
 export default router;

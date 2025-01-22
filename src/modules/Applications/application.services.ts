@@ -18,6 +18,7 @@ const getAnApplication = async (id: string) => {
 };
 
 const createApplication = async (data: TApplication) => {
+  console.log(data);
   const result = await ApplicationModel.create(data);
   return result;
 };

@@ -25,7 +25,6 @@ const applicationSchema = new Schema<TApplication>(
       type: String,
       required: [true, "Phone number is required."],
       trim: true,
-      match: [/^\+?[1-9]\d{1,14}$/, "Please provide a valid phone number."],
     },
     linkedIn: {
       type: String,

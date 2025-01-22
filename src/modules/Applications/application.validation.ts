@@ -17,7 +17,7 @@ export const validateApplication = z.object({
     .nonempty("Email is required."),
   phone: z
     .string()
-    .regex(/^\+?[1-9]\d{1,14}$/, "Please provide a valid phone number.")
+    .regex(/^(\+?[1-9]\d{1,14})?(\d{7,14})$/, "Please provide a valid phone number.")
     .trim()
     .nonempty("Phone number is required."),
   linkedIn: z.string().url("Please provide a valid LinkedIn URL.").optional(),

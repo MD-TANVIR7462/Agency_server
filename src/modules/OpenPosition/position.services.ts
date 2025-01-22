@@ -6,7 +6,7 @@ const getPositions = async () => {
     isActive: true,
     isDeleted: false,
   };
-  const result = await PositionModel.find(query).select("-isDeleted -__v");
+  const result = await PositionModel.find(query).select("-isDeleted -__v").populate("applicationID");
   return result;
 };
 
@@ -15,7 +15,7 @@ const getAPosition = async (id: string) => {
     _id: id,
     isActive: true,
     isDeleted: false,
-  }).select("-__v -isDeleted");
+  }).select("-__v -isDeleted").populate("applicationID");
   return result;
 };
 
