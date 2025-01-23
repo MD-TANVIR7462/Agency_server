@@ -22,7 +22,8 @@ export const validateProject = z.object({
   
   isActive: z.boolean().optional().default(true), 
   
-  isDeleted: z.boolean().optional().default(false), // Default is false if not provided
+  isDeleted: z.boolean().optional().default(false), 
+  isFeatured: z.boolean().optional().default(false)
 }).strict();
 
 // Zod Partial Validation for Updates

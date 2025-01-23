@@ -5,4 +5,5 @@ export type TProject = {
   link: string;
   isActive?: boolean;
   isDeleted?: boolean;
+  isFeatured?:boolean
 };

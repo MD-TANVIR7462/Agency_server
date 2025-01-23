@@ -43,6 +43,10 @@ const projectSchema = new Schema<TProject>(
       type: Boolean,
       default: false,
     },
+    isFeatured: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

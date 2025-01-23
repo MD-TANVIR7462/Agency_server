@@ -1,14 +1,18 @@
 import { TProject } from "./projects.interface";
 import { ProjectModel } from "./projects.model";
 
-const getProjects = async (variant?: string) => {
+const getProjects = async (queryData: any) => {
   const query: Record<string, any> = {
     isActive: true,
     isDeleted: false,
   };
-  if (variant !== undefined) {
-    query.category = variant;
+  if (queryData?.category !== undefined) {
+    query.category = queryData.category;
   }
+  if (queryData?.isFeatured !== undefined) {
+    query.isFeatured = queryData.isFeatured;
+  }
+  // console.log(queryData, "sds" ,query);
   const result = await ProjectModel.find(query).select("-isDeleted -__v");
   return result;
 };
