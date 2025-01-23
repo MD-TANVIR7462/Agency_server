@@ -4,7 +4,7 @@ import { ApplicationModel } from "./application.model";
 
 const getApplications = async (queryData: any) => {
   const excludeQuery = { ...queryData };
-  const deletedQuery = ["limit", "page"];
+  const deletedQuery = ["limit", "page","positionId"];
   const limit = queryData.limit || 10;
   deletedQuery.forEach((element) => delete excludeQuery[element]);
 
