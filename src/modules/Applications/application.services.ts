@@ -30,26 +30,61 @@ const getAnApplication = async (id: string) => {
   }).select("-__v -isDeleted");
   return result;
 };
+//!Without transaction rollback---->
+// const createApplication = async (data: TApplication) => {
+//   const findPosition = await PositionServices.getAPosition(
+//     data.positionId as string
+//   );
+//   if (!findPosition) {
+//     return null;
+//   }
+//   const result = await ApplicationModel.create(data);
+//   if (!result) {
+//     return null;
+//   }
+//   if (result.positionId && findPosition.applications) {
+//     findPosition.applications.push(result._id);
+//     await PositionServices.updateAPosition(data.positionId as string, {
+//       applications: findPosition.applications,
+//     });
+//   }
 
+//   return result;
+// };
+
+// !with transaction rollback ---->
 const createApplication = async (data: TApplication) => {
-  const findPosition = await PositionServices.getAPosition(
-    data.positionId as string
-  );
-  if (!findPosition) {
-    return null;
-  }
-  const result = await ApplicationModel.create(data);
-  if (!result) {
-    return null;
-  }
-  if (result.positionId && findPosition.applications) {
-    findPosition.applications.push(result._id);
+  const session = await ApplicationModel.startSession();
+  session.startTransaction();
+
+  try {
+    const findPosition = await PositionServices.getAPosition(data.positionId as string);
+    if (!findPosition) {
+      await session.abortTransaction();
+      session.endSession();
+      return null;
+    }
+
+    const result = await ApplicationModel.create([data], { session });
+    if (!result?.length) {
+      await session.abortTransaction();
+      session.endSession();
+      return null;
+    }
+
+    findPosition.applications?.push(result[0]._id);
     await PositionServices.updateAPosition(data.positionId as string, {
       applications: findPosition.applications,
-    });
-  }
+    }, session);
 
-  return result;
+    await session.commitTransaction();
+    session.endSession();
+    return result[0];
+  } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+    throw error;
+  }
 };
 
 const selectApplication = async (id: string) => {
