@@ -13,14 +13,12 @@ const getProjects = async (variant?: string) => {
   return result;
 };
 
-
 const getAProject = async (id: string) => {
   const result = await ProjectModel.findOne({
     _id: id,
     isActive: true,
     isDeleted: false,
   }).select("-__v -isDeleted");
-  console.log(result);
   return result;
 };
 

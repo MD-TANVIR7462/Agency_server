@@ -1,3 +1,4 @@
+import { PositionServices } from "../OpenPosition/position.services";
 import { TApplication } from "./application.interface";
 import { ApplicationModel } from "./application.model";
 
@@ -11,7 +12,6 @@ const getApplications = async (queryData: any) => {
     ((queryData.page ? Number(queryData.page) : 1) - 1) *
     (queryData.limit ? Number(queryData.limit) : 10);
 
-  console.log(paginationQuery);
   const query: Record<string, any> = {
     isDeleted: false,
     ...excludeQuery,
@@ -32,7 +32,23 @@ const getAnApplication = async (id: string) => {
 };
 
 const createApplication = async (data: TApplication) => {
+  const findPosition = await PositionServices.getAPosition(
+    data.positionId as string
+  );
+  if (!findPosition) {
+    return null;
+  }
   const result = await ApplicationModel.create(data);
+  if (!result) {
+    return null;
+  }
+  if (result.positionId && findPosition.applications) {
+    findPosition.applications.push(result._id);
+    await PositionServices.updateAPosition(data.positionId as string, {
+      applications: findPosition.applications,
+    });
+  }
+
   return result;
 };
 

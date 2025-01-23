@@ -47,6 +47,14 @@ const createApplication: RequestHandler = async (req, res, next) => {
   try {
     const validateData = validateApplication.parse(req.body);
     const data = await ApplicationServices.createApplication(validateData);
+    if (!data) {
+      res.status(404).json({
+        success: true,
+        message: `Make sure Position ID ${validateData?.positionId} is correct`,
+        data: null,
+      });
+      return;
+    }
     res.status(201).json({
       success: true,
       message: "Application created successfully.",
