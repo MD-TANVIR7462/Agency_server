@@ -8,5 +8,4 @@ export type TResistration = {
   img: string;
   isActive: boolean;
   isDeleted: boolean;
-  needPasswordChange: boolean;
 };

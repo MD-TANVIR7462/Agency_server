@@ -21,7 +21,7 @@ export const registrationValidationSchema = z.object({
     .string({
       required_error: "Password is required.",
     })
-    .min(6, "Password must be at least 6 characters long."),
+    .min(6, "Password must be at least 6 characters long.").max(20, "Password can not be more then 20 charecters"),
 
   role: z.enum(["admin", "superadmin"], {
     required_error: "Role is required.",
@@ -47,4 +47,4 @@ export const registrationValidationSchema = z.object({
   isDeleted: z.boolean().default(false),
 
   needPasswordChange: z.boolean().default(true),
-});
+}).strict();

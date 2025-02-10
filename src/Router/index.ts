@@ -12,6 +12,7 @@ import { ContactRoute } from "../modules/Contact/contact.route";
 import { SettingsRoute } from "../modules/WebSettings/settings.route";
 import { PositionRoute } from "../modules/OpenPosition/position.route";
 import { ApplicationRoute } from "../modules/Applications/application.route";
+import { RegistrationRoutes } from "../modules/Auth/Registration/auth.routes";
 const router = Router();
 
 router.use("/banner", BannerRoutes);
@@ -27,4 +28,5 @@ router.use("/contact", ContactRoute);
 router.use("/settings", SettingsRoute);
 router.use("/position", PositionRoute);
 router.use("/application", ApplicationRoute);
+router.use("/registration", RegistrationRoutes);
 export default router;

@@ -1,5 +1,7 @@
 import { Schema, model } from "mongoose";
 import { TResistration } from "./auth.interface";
+import bcrypt from "bcrypt";
+import { envConfig } from "../../../utils/config";
 
 const registrationSchema = new Schema<TResistration>(
   {
@@ -20,6 +22,8 @@ const registrationSchema = new Schema<TResistration>(
     password: {
       type: String,
       required: [true, "Password is required."],
+      minlength: [6, "Password must be at least 6 characters long."],
+      maxlength: [20, "Password can not be more then 20 charecters"],
     },
     role: {
       type: String,
@@ -64,13 +68,21 @@ const registrationSchema = new Schema<TResistration>(
       required: false,
       default: false,
     },
-    needPasswordChange: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
   },
   { timestamps: true }
 );
+
+//pre hook for hash the password......
+registrationSchema.pre("save", async function (next) {
+  const user = this;
+  user.password = await bcrypt.hash(user.password, Number(envConfig.bcryptRound));
+  next();
+});
+
+//post hook for skip the password field for the frontend
+registrationSchema.post("save", function (doc, next) {
+  doc.password = "";
+  next();
+});
 
 export const RegistrationModel = model<TResistration>("user", registrationSchema);
