@@ -27,11 +27,7 @@ export const registrationValidationSchema = z.object({
     required_error: "Role is required.",
   }),
 
-  location: z
-    .string()
-    .trim()
-    .max(200, "Location cannot exceed 200 characters.")
-    .optional(),
+  location: z.string().trim().max(200, "Location cannot exceed 200 characters.").optional(),
 
   phone: z
     .string()

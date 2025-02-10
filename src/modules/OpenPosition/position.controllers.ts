@@ -46,7 +46,7 @@ const getAPosition: RequestHandler = async (req, res, next) => {
 const createPosition: RequestHandler = async (req, res, next) => {
   try {
     const validateData = validatePosition.parse(req.body);
-    const data = await PositionServices.createPosition(validateData);
+    const data = await PositionServices.createPosition(validateData as any);
     res.status(201).json({
       success: true,
       message: "Position created successfully.",
@@ -61,7 +61,7 @@ const updateAPosition: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
     const updateData = validateUpdatePosition.parse(req.body);
-    const data = await PositionServices.updateAPosition(id, updateData);
+    const data = await PositionServices.updateAPosition(id, updateData as any);
     if (!data) {
       notUpdated(res, id, data);
       return;

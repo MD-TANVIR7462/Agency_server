@@ -67,7 +67,7 @@ const registrationSchema = new Schema<TResistration>(
     needPasswordChange: {
       type: Boolean,
       required: false,
-      default: true ,
+      default: true,
     },
   },
   { timestamps: true }
