@@ -24,7 +24,7 @@ const createPosition = async (data: TPosition) => {
   return result;
 };
 
-const updateAPosition = async (id: string, data: Partial<TPosition>) => {
+const updateAPosition = async (id: string, data: Partial<TPosition>, session: unknown) => {
   const result = await PositionModel.findByIdAndUpdate(
     id,
     { $set: data },
