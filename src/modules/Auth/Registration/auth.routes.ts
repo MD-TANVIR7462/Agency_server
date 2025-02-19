@@ -4,7 +4,7 @@ import { AuthController } from "./auth.controller";
 
 const router = Router();
 
-router.post("/register", AuthController.registerUser);
+router.post("/", AuthController.registerUser);
 router.get("/all", AuthController.getAllUsers);
 router.get("/:id", AuthController.getUserById);
 router.patch("/update-user/:id", AuthController.updateUser);
