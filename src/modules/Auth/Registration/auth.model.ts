@@ -68,6 +68,11 @@ const registrationSchema = new Schema<TResistration>(
       required: false,
       default: false,
     },
+    needPasswordChange: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
   },
   { timestamps: true }
 );

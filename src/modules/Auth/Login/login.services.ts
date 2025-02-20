@@ -19,6 +19,7 @@ const loginUuser = async (data: TLogin) => {
   }
 
   const isPasswordMatch = await bcrypt.compare(data?.password, isUserExist?.password);
+  console.log(isPasswordMatch);
 };
 
 export const loginServices = {

@@ -6,6 +6,7 @@ export type TResistration = {
   location?: string;
   phone?: string;
   img: string;
-  isActive: boolean;
-  isDeleted: boolean;
+  isActive?: boolean;
+  isDeleted?: boolean;
+  needPasswordChange?:boolean
 };

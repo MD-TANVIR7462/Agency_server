@@ -10,7 +10,7 @@ const loginUuser: RequestHandler = async (req, res, next) => {
       res.status(200).send(
          {
             success: true,
-            onmessage: "User login successfully.",
+            message: "User login successfully.",
             data: loginSuccess,
          }
       )
