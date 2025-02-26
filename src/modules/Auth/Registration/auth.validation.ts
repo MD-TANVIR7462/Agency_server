@@ -45,6 +45,6 @@ export const registrationValidationSchema = z.object({
   isActive: z.boolean().default(true),
 
   isDeleted: z.boolean().default(false),
-  needPasswordChange: z.boolean().default(false),
+  needPasswordChange: z.boolean().default(true),
 
 }).strict();

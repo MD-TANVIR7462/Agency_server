@@ -17,6 +17,7 @@ const createBanner: RequestHandler = async (req, res, next) => {
 };
 
 const getBanner: RequestHandler = async (req, res, next) => {
+  console.log("banner", req.user);
   try {
     const data = await BannerServices.getBanner();
 
