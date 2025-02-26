@@ -14,6 +14,7 @@ import { PositionRoute } from "../modules/OpenPosition/position.route";
 import { ApplicationRoute } from "../modules/Applications/application.route";
 import { RegistrationRoutes } from "../modules/Auth/Registration/auth.routes";
 import { LoginRoutes } from "../modules/Auth/Login/login.routes";
+import { passwordChangeRoute } from "../modules/Auth/ChangePassword/changepass.routes";
 const router = Router();
 
 router.use("/banner", BannerRoutes);
@@ -31,4 +32,5 @@ router.use("/position", PositionRoute);
 router.use("/application", ApplicationRoute);
 router.use("/auth/register", RegistrationRoutes);
 router.use("/auth/login", LoginRoutes);
+router.use("/auth/change-password", passwordChangeRoute);
 export default router;

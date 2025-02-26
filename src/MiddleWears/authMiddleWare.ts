@@ -38,4 +38,5 @@ export const authMiddleware = (...requiredRoles: TUserRole[]) => {
       next(error);
     }
   };
+  
 };
