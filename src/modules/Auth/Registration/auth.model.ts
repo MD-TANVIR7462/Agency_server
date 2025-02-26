@@ -24,6 +24,7 @@ const registrationSchema = new Schema<TResistration>(
       required: [true, "Password is required."],
       minlength: [6, "Password must be at least 6 characters long."],
       maxlength: [20, "Password can not be more then 20 charecters"],
+      select:0
     },
     role: {
       type: String,

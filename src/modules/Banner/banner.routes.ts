@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { BannerController } from "./banner.controller";
-import { authMiddleware } from "../../MiddleWears/authMiddleWare";
+import { permission } from "../../utils";
+
 const router = Router();
 
-router.get("/",authMiddleware, BannerController.getBanner);
-router.post("/create-banner",authMiddleware, BannerController.createBanner);
-router.patch("/update-banner/:id",authMiddleware, BannerController.updateBanner);
+router.get("/", BannerController.getBanner);
+router.post("/create-banner", BannerController.createBanner);
+router.patch("/update-banner/:id",  BannerController.updateBanner);
 
 export const BannerRoutes = router;
