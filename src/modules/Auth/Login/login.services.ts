@@ -12,7 +12,6 @@ const loginUuser = async (data: TLogin) => {
   }
 
   const userActice = isUserExist.isActive;
-
   if (!userActice) {
     const data = {
       message: "User Exist But current user status is Blocked ",
