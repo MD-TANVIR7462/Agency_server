@@ -9,4 +9,5 @@ export type TResistration = {
   isActive?: boolean;
   isDeleted?: boolean;
   needPasswordChange?:boolean
+  passwordChangeAt?:Date
 };

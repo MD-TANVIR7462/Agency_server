@@ -74,6 +74,10 @@ const registrationSchema = new Schema<TResistration>(
       required: false,
       default: true,
     },
+    passwordChangeAt:{
+      type:Date,
+      required:false
+    }
   },
   { timestamps: true }
 );

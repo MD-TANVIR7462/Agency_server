@@ -8,17 +8,18 @@ export const changePassword: RequestHandler = async (req, res, next) => {
     const currentUser = req.user;
     const userData = { currentUser, ...data };
     const result = await changePasswordSercice(userData);
+    console.log(result)
     if (!result) {
       res.status(400).json({
         success: false,
         message: "Error!",
-        data: data,
+        data: null,
       });
     }
     res.status(200).json({
       success: true,
       message: "Password Updated successfully.",
-      data: [],
+      data: null,
     });
   } catch (err) {
     next(err);
