@@ -5,10 +5,10 @@ import { permission } from "../../../utils";
 
 const router = Router();
 
-router.post("/", AuthController.registerUser);
-router.get("/all",permission.bothAdmins, AuthController.getAllUsers);
-router.get("/:id", AuthController.getUserById);
-router.patch("/update-user/:id", AuthController.updateUser);
-router.delete("/delete-user/:id", AuthController.deleteUser);
+router.post("/", permission.bothAdmins, AuthController.registerUser);
+router.get("/all", permission.bothAdmins, AuthController.getAllUsers);
+router.get("/:id", permission.bothAdmins, AuthController.getUserById);
+router.patch("/update-user/:id", permission.superAdmin, AuthController.updateUser);
+router.delete("/delete-user/:id", permission.superAdmin, AuthController.deleteUser);
 
 export const RegistrationRoutes = router;

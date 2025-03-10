@@ -46,6 +46,5 @@ export const registrationValidationSchema = z.object({
 
   isDeleted: z.boolean().default(false),
   needPasswordChange: z.boolean().default(true),
-  passwordChangeAt:z.date()
 
 }).strict();
