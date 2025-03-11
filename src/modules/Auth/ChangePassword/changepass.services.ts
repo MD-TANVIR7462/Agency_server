@@ -37,7 +37,7 @@ export const changePasswordSercice = async (data: {
     {
       password: newHaspass,
       needPasswordChange: false,
-      passwordChangeAt:new Date()
+      passwordChangeAt: new Date(),
     }
   ).select("-password --v");
   return result;
