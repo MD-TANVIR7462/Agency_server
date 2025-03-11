@@ -10,3 +10,6 @@ export const loginValidation = z
     }),
   })
   .strict();
+export const refreshTokenValidation = z.string({
+  required_error: "Refresh Token is Required !",
+});
