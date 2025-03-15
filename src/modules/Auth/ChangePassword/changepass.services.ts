@@ -39,6 +39,9 @@ export const changePasswordSercice = async (data: {
       needPasswordChange: false,
       passwordChangeAt: new Date(),
     }
+
+
+    
   ).select("-password --v");
   return result;
 };
