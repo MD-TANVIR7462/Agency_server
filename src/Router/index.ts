@@ -33,4 +33,5 @@ router.use("/application", ApplicationRoute);
 router.use("/auth/register", RegistrationRoutes);
 router.use("/auth/login", LoginRoutes);
 router.use("/auth/change-password", passwordChangeRoute);
+
 export default router;
