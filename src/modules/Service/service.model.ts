@@ -10,6 +10,11 @@ const serviceSchema = new Schema<TService>(
       minlength: [1, "Title cannot be empty."],
       maxlength: [25, "Title cannot exceed 25 characters."],
     },
+    icon: {
+      type: String,
+      required: false,
+      trim: true,
+    },
     shortDes: {
       type: String,
       required: [true, "Short description is required."],
