@@ -19,7 +19,7 @@ export const changePassword: RequestHandler = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: "Password Updated successfully.",
-      data: null,
+      data: data,
     });
   } catch (err) {
     next(err);

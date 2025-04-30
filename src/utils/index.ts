@@ -13,6 +13,5 @@ export const permission = {
 
 export const isPasswordChange = (utcPass: Date, jwtPass: number) => {
   const passwordChangedAt = Math.floor(new Date(utcPass).getTime() / 1000);
-  console.log(passwordChangedAt, jwtPass);
   return passwordChangedAt > jwtPass;
 };

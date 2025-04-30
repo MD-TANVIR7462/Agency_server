@@ -4,6 +4,7 @@ import { envConfig } from "../utils/config";
 import { TUserRole } from "../Constant";
 import { RegistrationModel } from "../modules/Auth/Registration/auth.model";
 import { isPasswordChange } from "../utils";
+
 export const authMiddleware = (...requiredRoles: TUserRole[]) => {
   return (req: Request, res: Response, next: NextFunction): void => {
     try {
@@ -49,7 +50,7 @@ export const authMiddleware = (...requiredRoles: TUserRole[]) => {
           if (result) {
             res.status(401).json({
               success: false,
-              message: "You are providing a old Password!",
+              message: "Wrong Credentials ! Please Login First!",
             });
             return;
           }

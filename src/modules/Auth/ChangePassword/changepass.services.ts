@@ -28,7 +28,7 @@ export const changePasswordSercice = async (data: {
     throw new Error("Wrong Password !");
   }
   if (data.oldPassword === data.newPassword) {
-    throw new Error("Your new password must be different from your previous one.");
+    throw new Error("new password must be different from previous one.");
   }
   const newHaspass = await bcrypt.hash(data.newPassword, Number(envConfig.bcryptRound));
 
