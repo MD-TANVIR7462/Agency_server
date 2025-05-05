@@ -15,3 +15,10 @@ export const validateContact = z
   .strict();
 
 export const validateUpdateContact = validateContact.partial();
+
+
+
+
+
+
+
