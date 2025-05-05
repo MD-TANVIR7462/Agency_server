@@ -19,7 +19,7 @@ export const frogetPassService = async (id: string) => {
     email: isUserExist.email,
     role: isUserExist.role,
   };
-  const accessToken = jwt.sign(userData, jwt_Secret as string, { expiresIn: "10m" });
-  const resetUILink = `${envConfig.websiteLink}?id=${id}&token=${accessToken}`;
+  const resetToken = jwt.sign(userData, jwt_Secret as string, { expiresIn: "10m" });
+  const resetUILink = `${envConfig.websiteLink}?id=${id}&token=${resetToken}`;
   return resetUILink;
 };
