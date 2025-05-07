@@ -8,7 +8,6 @@ export const changePassword: RequestHandler = async (req, res, next) => {
     const currentUser = req.user;
     const userData = { currentUser, ...data };
     const result = await changePasswordSercice(userData);
-    console.log(result)
     if (!result) {
       res.status(400).json({
         success: false,

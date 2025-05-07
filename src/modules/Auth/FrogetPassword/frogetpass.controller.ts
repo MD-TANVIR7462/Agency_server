@@ -4,15 +4,15 @@ import { frogetPassService } from "./frogetPass.services";
 
 export const frogetPasswordController: RequestHandler = async (req, res, next) => {
   try {
-    const userID = {
-      id: req.body.id,
+    const userEmail = {
+      email: req.body.email,
     };
-    const validteID = frogetPasswordValidation.parse(userID);
-    const result = await frogetPassService(validteID.id);
+    const validteID = frogetPasswordValidation.parse(userEmail);
+    const result = await frogetPassService(validteID.email);
     res.status(200).send({
       success: true,
-      message: "Reset link  genarated successfully.",
-      data: result,
+      message: "Please check your mail to Reset your Password!",
+      result,
     });
   } catch (err) {
     next(err);
