@@ -35,6 +35,6 @@ router.use("/application", ApplicationRoute);
 router.use("/auth/register", RegistrationRoutes);
 router.use("/auth/login", LoginRoutes);
 router.use("/auth/change-password", passwordChangeRoute);
-router.use("/auth/forgot-password", frogetPasswordRoute);
+router.use("/auth/password", frogetPasswordRoute);
 
 export default router;

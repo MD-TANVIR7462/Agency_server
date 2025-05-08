@@ -7,3 +7,14 @@ export const frogetPasswordValidation = z
     }),
   })
   .strict();
+
+export const resetPasswordValidation = z
+  .object({
+    id: z.string({
+      required_error: "User id is required",
+    }),
+    newPass: z.string({
+      required_error: "New Password is required",
+    }),
+  })
+  .strict();
