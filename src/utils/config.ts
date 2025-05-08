@@ -9,6 +9,7 @@ const productionType = process.env.NODE_ENV;
 const websiteLink = process.env.WEBSITE_LINK;
 const nodeENV = process.env.NODE_ENV;
 const gmailAuthPass = process.env.GMAIL_AUTH_PASS;
+const recruiter_gmail = process.env.RECRUITER_GMAIL;
 
 export const envConfig = {
   bcryptRound,
@@ -18,4 +19,5 @@ export const envConfig = {
   websiteLink,
   nodeENV,
   gmailAuthPass,
+  recruiter_gmail
 };
