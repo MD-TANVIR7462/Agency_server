@@ -3,9 +3,10 @@ import { TApplication } from "./application.interface";
 import { ApplicationModel } from "./application.model";
 
 const getApplications = async (queryData: any) => {
+ 
   const excludeQuery = { ...queryData };
   const deletedQuery = ["limit", "page","positionId"];
-  const limit = queryData.limit || 10;
+  const limit = queryData.limit || 25;
   deletedQuery.forEach((element) => delete excludeQuery[element]);
 
   const paginationQuery =
