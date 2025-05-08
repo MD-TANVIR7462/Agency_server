@@ -46,12 +46,12 @@ Create a `.env` file in the root of the project and configure the following envi
 NODE_ENV=development      # Set to 'production' in production environment
 PORT=3000                 # Port the server will run on
 MONGODB_URI=mongodb://localhost:27017/agency-db  # MongoDB connection string
-BCRYPT_SALT=10            # Salt rounds for bcrypt password hashing
+BCRYPT_SALT=             # Salt rounds for bcrypt password hashing
 WEBSITE_LINK=https://www.yourwebsite.com  # Your website link (for emails, etc.)
 JWT_ACCESS_SECRET=your_access_jwt_secret  # Secret for access token
 JWT_REFRESH_SECRET=your_refresh_jwt_secret  # Secret for refresh token
-JWT_EXPIRES_IN=1d         # JWT access token expiration time
-EMAIL_HOST=smtp.example.com  # SMTP server for email sending (e.g., Gmail, SendGrid)
+JWT_EXPIRES_IN=         # JWT access token expiration time
+EMAIL_HOST=email hosting  # SMTP server for email sending (e.g., Gmail, SendGrid)
 EMAIL_USER=your@email.com    # Your email address for sending emails
 EMAIL_PASS=your-email-password  # Your email password (or app-specific password for Gmail)
 GMAIL_AUTH_PASS=your_gmail_auth_password  # Gmail authentication password for Nodemailer
