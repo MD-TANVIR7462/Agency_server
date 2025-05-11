@@ -5,7 +5,7 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 
-A customizable **recruitment system** dashboard built with **Node.js**, **Express**, **MongoDB**, and **TypeScript**. This server provides features for managing job applications, user roles, and automating email notifications for an efficient hiring process.
+A customizable **Soft ware firm website with recruitment system** dashboard built with **Node.js**, **Express**, **MongoDB**, and **TypeScript**. This server provides features for managing job applications, user roles, and automating email notifications for an efficient hiring process.
 
 ## 🚀 Features
 - **Role-based Access Control**: Different roles including `User`, `Admin`, and `Superadmin` to ensure proper permission management.
