@@ -6,5 +6,6 @@ export type TProject = {
   isActive?: boolean;
   isDeleted?: boolean;
   isFeatured?:boolean;
-  description: string,
+  description: string
+  
 };
