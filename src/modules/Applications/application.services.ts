@@ -1,25 +1,23 @@
+import { sendConfirmationEmail } from "../../utils/SendConfirmationEmail";
+import { sendNotificationToAdminEmail } from "../../utils/sendNotificationMailtoAdmin";
 import { PositionServices } from "../OpenPosition/position.services";
 import { TApplication } from "./application.interface";
 import { ApplicationModel } from "./application.model";
 
 const getApplications = async (queryData: any) => {
   const excludeQuery = { ...queryData };
-  const deletedQuery = ["limit", "page","positionId"];
-  const limit = queryData.limit || 10;
+  const deletedQuery = ["limit", "page", "positionId"];
+  const limit = queryData.limit || 25;
   deletedQuery.forEach((element) => delete excludeQuery[element]);
 
   const paginationQuery =
-    ((queryData.page ? Number(queryData.page) : 1) - 1) *
-    (queryData.limit ? Number(queryData.limit) : 10);
+    ((queryData.page ? Number(queryData.page) : 1) - 1) * (queryData.limit ? Number(queryData.limit) : 10);
 
   const query: Record<string, any> = {
     isDeleted: false,
     ...excludeQuery,
   };
-  const result = await ApplicationModel.find(query)
-    .select("-isDeleted -__v")
-    .skip(paginationQuery)
-    .limit(limit);
+  const result = await ApplicationModel.find(query).select("-isDeleted -__v").skip(paginationQuery).limit(limit);
   return result;
 };
 
@@ -73,9 +71,18 @@ const createApplication = async (data: TApplication) => {
     }
 
     findPosition.applications?.push(result[0]._id);
-    await PositionServices.updateAPosition(data.positionId as string, {
-      applications: findPosition.applications,
-    }, session);
+    await PositionServices.updateAPosition(
+      data.positionId as string,
+      {
+        applications: findPosition.applications,
+      },
+      session
+    );
+//?maill to the Applicant
+    sendConfirmationEmail(data.email, data.fullName, findPosition.title, data.resumeUrl);
+
+//?mail to the admin / recruiter email
+    sendNotificationToAdminEmail(data.fullName, findPosition.title, data.resumeUrl);
 
     await session.commitTransaction();
     session.endSession();

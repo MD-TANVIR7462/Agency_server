@@ -26,6 +26,11 @@ const bannerSchema = new Schema<TBanner>(
       required: false,
       default: true,
     },
+    activeBanner: {
+      type: Number,
+      required: false,
+      default: 1,
+    },
     img_url: {
       type: String,
       required: [true, "Image URL is required."],

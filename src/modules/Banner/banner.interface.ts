@@ -4,4 +4,5 @@ export type TBanner = {
   subtext: string;
   img_url: string;
   isActive?: boolean;
+  activeBanner?:number
 };

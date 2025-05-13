@@ -2,6 +2,9 @@ import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { envConfig } from "../utils/config";
 import { TUserRole } from "../Constant";
+import { RegistrationModel } from "../modules/Auth/Registration/auth.model";
+import { isPasswordChange } from "../utils";
+
 export const authMiddleware = (...requiredRoles: TUserRole[]) => {
   return (req: Request, res: Response, next: NextFunction): void => {
     try {
@@ -13,9 +16,8 @@ export const authMiddleware = (...requiredRoles: TUserRole[]) => {
         });
         return;
       }
-
       //check if the token is valid
-      jwt.verify(accessToken, envConfig.jwtSecret as string, function (err, decoded) {
+      jwt.verify(accessToken, envConfig.accessSecret as string, async function (err, decoded) {
         if (err) {
           res.status(401).json({
             success: false,
@@ -23,6 +25,37 @@ export const authMiddleware = (...requiredRoles: TUserRole[]) => {
           });
           return;
         }
+        const isUserExist = await RegistrationModel.findOne({ email: (decoded as JwtPayload).email });
+
+        if (!isUserExist) {
+          res.status(401).json({
+            success: false,
+            message: "Access denied! User not found with this email .",
+          });
+          return;
+        }
+
+        const userActice = isUserExist.isActive;
+
+        if (!userActice) {
+          res.status(401).json({
+            success: false,
+            message: "Access denied! This account exists but currently inactive.",
+          });
+          return;
+        }
+
+        if (isUserExist.passwordChangeAt) {
+          const result = isPasswordChange(isUserExist.passwordChangeAt, (decoded as JwtPayload).iat as number);
+          if (result) {
+            res.status(401).json({
+              success: false,
+              message: "Wrong Credentials ! Please Login First!",
+            });
+            return;
+          }
+        }
+
         //role matching
         if (requiredRoles && !requiredRoles.includes((decoded as JwtPayload)?.role)) {
           res.status(401).json({
@@ -38,5 +71,4 @@ export const authMiddleware = (...requiredRoles: TUserRole[]) => {
       next(error);
     }
   };
-  
 };

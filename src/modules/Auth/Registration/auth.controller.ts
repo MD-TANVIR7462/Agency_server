@@ -36,23 +36,23 @@ const getAllUsers: RequestHandler = async (req, res, next) => {
   }
 };
 
-const getUserById: RequestHandler = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const data = await AuthServices.getUserById(id);
-    if (!data) {
-      emptyResponse(res, data);
-      return;
-    }
-    res.status(200).json({
-      success: true,
-      message: "User retrieved successfully.",
-      data,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
+// const getUserById: RequestHandler = async (req, res, next) => {
+//   try {
+//     const { id } = req.params;
+//     const data = await AuthServices.getUserById(id);
+//     if (!data) {
+//       emptyResponse(res, data);
+//       return;
+//     }
+//     res.status(200).json({
+//       success: true,
+//       message: "User retrieved successfully.",
+//       data,
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// };
 
 const updateUser: RequestHandler = async (req, res, next) => {
   try {
@@ -91,10 +91,29 @@ const deleteUser: RequestHandler = async (req, res, next) => {
   }
 };
 
+const getMe: RequestHandler = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    if (!token) {
+      throw new Error("You are unauthorized!");
+    }
+    const data = await AuthServices.getMe(token);
+
+    res.status(200).json({
+      success: true,
+      message: "User retrieved successfully.",
+      data,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const AuthController = {
   registerUser,
   getAllUsers,
-  getUserById,
+  // getUserById,
   updateUser,
   deleteUser,
+  getMe,
 };
