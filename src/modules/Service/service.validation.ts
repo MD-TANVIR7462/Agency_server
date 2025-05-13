@@ -9,7 +9,7 @@ export const validateService = z
       .string()
       .min(1, "Short description cannot be empty.")
       .max(150, "Short description cannot exceed 150 characters."),
-    fullDes: z
+    fullDescription: z
       .string()
       .min(1, "Full description cannot be empty.")
       .max(260, "Full description cannot exceed 260 characters."),
@@ -30,7 +30,7 @@ export const validateUpdateService = z
       .min(1, "Short description cannot be empty.")
       .max(150, "Short description cannot exceed 150 characters.")
       .optional(),
-    fullDes: z
+    fullDescription: z
       .string()
       .min(1, "Full description cannot be empty.")
       .max(260, "Full description cannot exceed 260 characters.")
