@@ -54,3 +54,4 @@ debug.log
 # Optional: Uncomment if using a specific CI/CD platform and want to exclude their files
 # .github/
 # .gitlab/
+.vercel
