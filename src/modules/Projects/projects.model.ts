@@ -11,6 +11,14 @@ const projectSchema = new Schema<TProject>(
       minlength: [3, "Title must be at least 3 characters long."],
       maxlength: [100, "Title cannot exceed 100 characters."],
     },
+    description: {
+      type: String,
+      unique: true,
+      trim: true,
+      required: [true, "description is required."],
+      minlength: [20, "description must be at least 20 characters long."],
+      maxlength: [100, "description cannot exceed 100 characters."],
+    },
     category: {
       type: String,
       required: [true, "Category is required."],
