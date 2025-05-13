@@ -5,4 +5,6 @@ export type TTestimonial = {
     image:string
     isActive?: boolean,
     isDeleted?:boolean,
+
+    
 };
