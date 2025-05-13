@@ -94,7 +94,7 @@ src/
 
 ## 📑 API Documentation
 To interact with the API, you can use the following endpoints:
-
+###NOTE. **https://agency-server-gamma.vercel.app/api/v1** - add api/v1/ after the main link
 1. **POST /auth/login** - User login to get an access token.
 2. **POST /auth/register** - User registration (requires admin privileges).
 3. **GET /applications** - Fetch all job applications.
