@@ -1,7 +1,8 @@
 export type TTechnologies = {
-    name: string,
-    tech: string[],
-    gradient: string,
-    isActive?: boolean,
-    isDeleted?:boolean,
+  name: string;
+  icon?: string;
+  tech: string[];
+  gradient: string;
+  isActive?: boolean;
+  isDeleted?: boolean;
 };
