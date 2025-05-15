@@ -21,11 +21,6 @@ const bannerSchema = new Schema<TBanner>(
       trim: true,
       maxlength: [180, "Subtext cannot exceed 250 characters."],
     },
-    isActive: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
     activeBanner: {
       type: Number,
       required: false,

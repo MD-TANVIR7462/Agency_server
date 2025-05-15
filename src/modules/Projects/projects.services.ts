@@ -3,17 +3,19 @@ import { ProjectModel } from "./projects.model";
 
 const getProjects = async (queryData: any) => {
   const query: Record<string, any> = {
-    isActive: true,
     isDeleted: false,
   };
   if (queryData?.category !== undefined) {
     query.category = queryData.category;
   }
+  if (queryData?.isActive !== undefined) {
+    query.isActive = queryData.isActive;
+  }
   if (queryData?.isFeatured !== undefined) {
     query.isFeatured = queryData.isFeatured;
   }
   // console.log(queryData, "sds" ,query);
-  const result = await ProjectModel.find(query).select("-isDeleted -__v");
+  const result = await ProjectModel.find(query).select("-isDeleted -__v").sort("-createdAt");
   return result;
 };
 

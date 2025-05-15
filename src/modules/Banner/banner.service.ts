@@ -7,7 +7,7 @@ const createBanner = async (data: TBanner) => {
 };
 
 const getBanner = async () => {
-  const result = await BannerModel.find({ isActive: true });
+  const result = await BannerModel.find({}).select("-updatedAt -createdAt -__v ");
   return result;
 };
 
