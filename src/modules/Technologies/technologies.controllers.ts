@@ -1,14 +1,12 @@
 import { RequestHandler } from "express";
 import { TechnologyServices } from "./technologies.services";
-import {
-  validateTechnology,
-  validateUpdateTechnology,
-} from "./technologies.validation";
+import { validateTechnology, validateUpdateTechnology } from "./technologies.validation";
 import { emptyResponse, notUpdated } from "../../utils/Respons";
 
 const getTechnology: RequestHandler = async (req, res, next) => {
+  const queryData = req.query;
   try {
-    const data = await TechnologyServices.getTechnology();
+    const data = await TechnologyServices.getTechnology(queryData);
     if (data.length <= 0) {
       emptyResponse(res, data);
       return;

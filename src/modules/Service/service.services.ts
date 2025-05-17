@@ -9,7 +9,7 @@ const getServices = async (queryData: any) => {
     query.isActive = true;
   }
 
-  console.log(query);
+
   const result = await ServiceModel.find(query).select("-__v");
   return result;
 };

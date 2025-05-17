@@ -9,7 +9,11 @@ const technologySchema = new Schema<TTechnologies>(
       trim: true,
       minlength: [1, "Name cannot be empty."],
       maxlength: [30, "Name cannot exceed 30 characters."],
-      
+    },
+     icon: {
+      type: String,
+      required: false,
+      trim: true,
     },
     tech: {
       type: [String],
@@ -39,4 +43,3 @@ const technologySchema = new Schema<TTechnologies>(
 );
 
 export const TechnologyModel = model<TTechnologies>("Technology", technologySchema);
-

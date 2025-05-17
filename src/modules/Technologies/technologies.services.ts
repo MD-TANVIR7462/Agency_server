@@ -1,11 +1,14 @@
 import { TTechnologies } from "./technologies.interface";
 import { TechnologyModel } from "./technologies.model";
 
-const getTechnology = async () => {
-  const result = await TechnologyModel.find({
-    isActive: true,
+const getTechnology = async (queryData: any) => {
+  const query: Record<string, any> = {
     isDeleted: false,
-  }).select("-__v");
+  };
+  if (queryData.isActive === "true") {
+    query.isActive = true;
+  }
+  const result = await TechnologyModel.find(query).select("-__v");
   return result;
 };
 const getATechnology = async (id: string) => {
@@ -21,17 +24,13 @@ const createTechnology = async (data: TTechnologies) => {
   return result;
 };
 const updateATechnology = async (id: string, data: Partial<TTechnologies>) => {
-  const result = await TechnologyModel.findByIdAndUpdate(
-    id,
-    { $set: data },
-    { new: true }
-  );
+  const result = await TechnologyModel.findByIdAndUpdate(id, { $set: data }, { new: true });
   return result;
 };
 const deleteATechnology = async (id: string) => {
   const result = await TechnologyModel.findByIdAndUpdate(
     id,
-    { $set: { isDeleted: true } },
+    { $set: { isDeleted: true, isActive: false } },
     { new: true }
   );
   return result;
