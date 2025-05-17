@@ -5,7 +5,8 @@ import { emptyResponse, notUpdated } from "../../utils/Respons";
 
 const getServices: RequestHandler = async (req, res, next) => {
   try {
-    const data = await ServiceServices.getServices();
+    const query = req.query
+    const data = await ServiceServices.getServices(query as object);
     if (data.length <= 0) {
       emptyResponse(res, data);
       return;

@@ -1,18 +1,23 @@
 import { TService } from "./service.interface";
 import ServiceModel from "./service.model";
 
-const getServices = async () => {
-  const result = await ServiceModel.find({
-    isActive: true,
+const getServices = async (queryData: any) => {
+  const query: Record<string, any> = {
     isDeleted: false,
-  }).select("-__v");
+  };
+  if (queryData.isActive==="true") {
+    query.isActive = true;
+  }
+
+  console.log(query)
+  const result = await ServiceModel.find(query).select("-__v");
   return result;
 };
 const getAService = async (id: string) => {
   const result = await ServiceModel.findOne({
-    _id:id,
-    isActive:true,
-    isDeleted:false
+    _id: id,
+    isActive: true,
+    isDeleted: false,
   }).select("-__v");
   return result;
 };
@@ -21,19 +26,11 @@ const createService = async (data: TService) => {
   return result;
 };
 const updateAService = async (id: string, data: Partial<TService>) => {
-  const result = await ServiceModel.findByIdAndUpdate(
-    id,
-    { $set: data },
-    { new: true }
-  );
+  const result = await ServiceModel.findByIdAndUpdate(id, { $set: data }, { new: true });
   return result;
 };
 const deleteAService = async (id: string) => {
-  const result = await ServiceModel.findByIdAndUpdate(
-    id,
-    { $set: { isDeleted: true } },
-    { new: true }
-  );
+  const result = await ServiceModel.findByIdAndUpdate(id, { $set: { isDeleted: true } }, { new: true });
   return result;
 };
 
