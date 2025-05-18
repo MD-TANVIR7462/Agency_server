@@ -2,7 +2,9 @@ import { TTestimonial } from "./testimonial.interface";
 import { TestimonialModel } from "./testimonial.model";
 
 const getTestimonial = async (status?: string) => {
-  const query: any = {};
+  const query: Record<string, any> = {
+    isDeleted: false,
+  };
   if (status !== undefined) {
     query.isActive = status;
   }
@@ -23,11 +25,7 @@ const createTestimonial = async (data: TTestimonial) => {
   return result;
 };
 const updateATestimonial = async (id: string, data: Partial<TTestimonial>) => {
-  const result = await TestimonialModel.findByIdAndUpdate(
-    id,
-    { $set: data },
-    { new: true }
-  );
+  const result = await TestimonialModel.findByIdAndUpdate(id, { $set: data }, { new: true });
   return result;
 };
 const deleteATestimonial = async (id: string) => {

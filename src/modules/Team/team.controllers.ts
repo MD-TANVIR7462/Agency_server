@@ -4,8 +4,9 @@ import { emptyResponse, notUpdated } from "../../utils/Respons";
 import { validateTeam, validateUpdateTeam } from "./team.validation";
 
 const getTeam: RequestHandler = async (req, res, next) => {
+  const queryData = req.query;
   try {
-    const data = await TeamServices.getTeam();
+    const data = await TeamServices.getTeam(queryData as any);
     if (data.length <= 0) {
       emptyResponse(res, data);
       return;

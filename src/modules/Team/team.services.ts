@@ -1,11 +1,15 @@
 import { TTeam } from "./team.interface";
 import { TeamModel } from "./team.model";
 
-const getTeam = async () => {
-  const result = await TeamModel.find({
-    isActive: true,
+const getTeam = async (queryData: any) => {
+  const query: Record<string, any> = {
     isDeleted: false,
-  }).select("-__v");
+  };
+  if (queryData.isActive === "true") {
+    query.isActive = true;
+  }
+
+  const result = await TeamModel.find(query).select("-__v");
   return result;
 };
 const getATeam = async (id: string) => {
@@ -21,19 +25,11 @@ const createTeam = async (data: TTeam) => {
   return result;
 };
 const updateATeam = async (id: string, data: Partial<TTeam>) => {
-  const result = await TeamModel.findByIdAndUpdate(
-    id,
-    { $set: data },
-    { new: true }
-  );
+  const result = await TeamModel.findByIdAndUpdate(id, { $set: data }, { new: true });
   return result;
 };
 const deleteATeam = async (id: string) => {
-  const result = await TeamModel.findByIdAndUpdate(
-    id,
-    { $set: { isDeleted: true } },
-    { new: true }
-  );
+  const result = await TeamModel.findByIdAndUpdate(id, { $set: { isDeleted: true, isActive: false } }, { new: true });
   return result;
 };
 
