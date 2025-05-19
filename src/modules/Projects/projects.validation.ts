@@ -8,8 +8,8 @@ export const validateProject = z.object({
     .max(100, "Title cannot exceed 100 characters."),
   description: z
     .string()
-    .min(20, "description must be at least 20 characters long.")
-    .max(100, "description cannot exceed 100 characters."),
+    .min(15, "description must be at least 15 characters long.")
+    .max(220, "description cannot exceed 220 characters."),
 
   category: z
     .string()

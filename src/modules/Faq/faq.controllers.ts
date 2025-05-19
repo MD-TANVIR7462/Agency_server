@@ -4,8 +4,9 @@ import { validateFaq, validateUpdateFaq } from "./faq.validation";
 import { FaqServices } from "./faq.servieces";
 
 const getFaq: RequestHandler = async (req, res, next) => {
+  const query = req.query;
   try {
-    const data = await FaqServices.getFaqs();
+    const data = await FaqServices.getFaqs(query as any);
     if (data.length <= 0) {
       emptyResponse(res, data);
       return;

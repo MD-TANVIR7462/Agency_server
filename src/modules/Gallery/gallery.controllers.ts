@@ -4,8 +4,9 @@ import { GalleryServices } from "./gallery.services";
 import { validateGallery, validateUpdateGallery } from "./gallery.validation";
 
 const getGallery: RequestHandler = async (req, res, next) => {
+  const query = req.query
   try {
-    const data = await GalleryServices.getGallery();
+    const data = await GalleryServices.getGallery(query as any);
     if (data.length <= 0) {
       emptyResponse(res, data);
       return;

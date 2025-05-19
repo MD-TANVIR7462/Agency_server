@@ -1,11 +1,14 @@
 import { TGallery } from "./gallery.interface";
 import { GalleryModel } from "./gallery.model";
 
-const getGallery = async () => {
-  const result = await GalleryModel.find({
+const getGallery = async (query: any) => {
+  const queryData: Record<string, any> = {
     isDeleted: false,
-    isActive: true,
-  }).select("-__v -isDeleted");
+  };
+  if (query.isActive !== undefined && query.isActive === "true") {
+    queryData.isActive = true;
+  }
+  const result = await GalleryModel.find(queryData).select("-__v -isDeleted");
   return result;
 };
 
@@ -24,11 +27,7 @@ const createGallery = async (data: TGallery) => {
 };
 
 const updateAGallery = async (id: string, data: Partial<TGallery>) => {
-  const result = await GalleryModel.findByIdAndUpdate(
-    id,
-    { $set: data },
-    { new: true }
-  );
+  const result = await GalleryModel.findByIdAndUpdate(id, { $set: data }, { new: true });
   return result;
 };
 
