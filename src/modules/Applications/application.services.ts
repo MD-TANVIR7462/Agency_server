@@ -1,5 +1,5 @@
 import { sendConfirmationEmail } from "../../utils/SendConfirmationEmail";
-import { sendNotificationToAdminEmail } from "../../utils/sendNotificationMailtoAdmin";
+import {   sendNotificationToAdminEmail } from "../../utils/sendNotificationMailtoAdmin";
 import { PositionServices } from "../OpenPosition/position.services";
 import { TApplication } from "./application.interface";
 import { ApplicationModel } from "./application.model";
@@ -78,10 +78,10 @@ const createApplication = async (data: TApplication) => {
       },
       session
     );
-//?maill to the Applicant
+    //?maill to the Applicant
     sendConfirmationEmail(data.email, data.fullName, findPosition.title, data.resumeUrl);
 
-//?mail to the admin / recruiter email
+    //?mail to the admin / recruiter email
     sendNotificationToAdminEmail(data.fullName, findPosition.title, data.resumeUrl);
 
     await session.commitTransaction();

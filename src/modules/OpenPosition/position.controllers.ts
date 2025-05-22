@@ -1,15 +1,13 @@
 import { RequestHandler } from "express";
 
 import { emptyResponse, notUpdated } from "../../utils/Respons";
-import {
-  validatePosition,
-  validateUpdatePosition,
-} from "./position.validation";
+import { validatePosition, validateUpdatePosition } from "./position.validation";
 import { PositionServices } from "./position.services";
 
 const getPositions: RequestHandler = async (req, res, next) => {
+  const queryData = req.query;
   try {
-    const data = await PositionServices.getPositions();
+    const data = await PositionServices.getPositions(queryData as any);
     if (data.length <= 0) {
       emptyResponse(res, data);
       return;
@@ -26,9 +24,10 @@ const getPositions: RequestHandler = async (req, res, next) => {
 };
 
 const getAPosition: RequestHandler = async (req, res, next) => {
+  const queryData = req.query;
   try {
     const { id } = req.params;
-    const data = await PositionServices.getAPosition(id);
+    const data = await PositionServices.getAPosition(id, queryData);
     if (!data) {
       notUpdated(res, id, data);
       return;

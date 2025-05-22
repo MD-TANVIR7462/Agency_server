@@ -17,11 +17,10 @@ export const validateApplication = z.object({
     .nonempty("Email is required."),
   phone: z
     .string()
-    .regex(/^(\+?[1-9]\d{1,14})?(\d{7,14})$/, "Please provide a valid phone number.")
     .trim()
     .nonempty("Phone number is required."),
-  linkedIn: z.string(),
-  portfolio: z.string(),
+  linkedIn: z.string().optional(),
+  portfolio: z.string().optional(),
   resumeUrl: z
     .string()
     .url("Please provide a valid resume URL.")

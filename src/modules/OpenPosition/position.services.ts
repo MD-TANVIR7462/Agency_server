@@ -1,21 +1,32 @@
 import { TPosition } from "./position.interface";
 import { PositionModel } from "./position.model";
 
-const getPositions = async () => {
+const getPositions = async (queryData: any) => {
   const query: Record<string, any> = {
-    isActive: true,
     isDeleted: false,
   };
-  const result = await PositionModel.find(query).select("-isDeleted -__v").populate("applications");
+  if (queryData.isActive) {
+    query.isActive = queryData.isActive;
+  }
+  const result = await PositionModel.find(query)
+    .select("-isDeleted -__v")
+    .populate("applications")
+    .sort({ createdAt: -1 });
   return result;
 };
 
-const getAPosition = async (id: string) => {
-  const result = await PositionModel.findOne({
+const getAPosition = async (id: string, queryData?: any) => {
+  const query: Record<string, any> = {
     _id: id,
-    isActive: true,
     isDeleted: false,
-  }).select("-__v -isDeleted").populate("applications");
+  };
+  if (queryData.isActive) {
+    query.isActive = queryData.isActive;
+  }
+  const result = await PositionModel.findOne(query)
+
+    .select("-__v -isDeleted")
+    .populate("applications");
   return result;
 };
 
@@ -25,11 +36,7 @@ const createPosition = async (data: TPosition) => {
 };
 
 const updateAPosition = async (id: string, data: Partial<TPosition>, session?: unknown) => {
-  const result = await PositionModel.findByIdAndUpdate(
-    id,
-    { $set: data },
-    { new: true }
-  );
+  const result = await PositionModel.findByIdAndUpdate(id, { $set: data }, { new: true });
   return result;
 };
 

@@ -29,18 +29,10 @@ const applicationSchema = new Schema<TApplication>(
     linkedIn: {
       type: String,
       trim: true,
-      match: [
-        /^(https?:\/\/)?([\w\d-]+\.)+[\w-]+(\/[^\s]*)?$/,
-        "Please provide a valid LinkedIn URL.",
-      ],
     },
     portfolio: {
       type: String,
       trim: true,
-      match: [
-        /^(https?:\/\/)?([\w\d-]+\.)+[\w-]+(\/[^\s]*)?$/,
-        "Please provide a valid portfolio URL.",
-      ],
     },
     resumeUrl: {
       type: String,
