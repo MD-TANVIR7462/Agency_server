@@ -6,20 +6,23 @@ import { TApplication } from "./application.interface";
 import { ApplicationModel } from "./application.model";
 
 const getApplications = async (queryData: any) => {
-  console.log(queryData)
-  const excludeQuery = { ...queryData };
-  const deletedQuery = ["limit", "page", "positionId","status"];
-  const limit = queryData.limit || 30;
-  deletedQuery.forEach((element) => delete excludeQuery[element]);
+  console.log(queryData);
 
-  const paginationQuery =
-    ((queryData.page ? Number(queryData.page) : 1) - 1) * (queryData.limit ? Number(queryData.limit) : 10);
+  const excludeQuery = { ...queryData };
+  const deletedQuery = ["limit", "page", "positionId", "status"];
+  deletedQuery.forEach((key) => delete excludeQuery[key]);
+
+  const limit = queryData.limit ? Number(queryData.limit) : 25;
+  const page = queryData.page ? Number(queryData.page) : 1;
+  const skip = (page - 1) * limit;
 
   const query: Record<string, any> = {
     isDeleted: false,
     ...excludeQuery,
   };
-  const result = await ApplicationModel.find(query).select("-isDeleted -__v").skip(paginationQuery).limit(limit);
+
+  const result = await ApplicationModel.find(query).select("-isDeleted -__v").skip(skip).limit(limit);
+
   return result;
 };
 
