@@ -1,24 +1,21 @@
 import { RequestHandler } from "express";
 
 import { emptyResponse, notUpdated } from "../../utils/Respons";
-import {
-  validateApplication,
-  validateUpdateApplication,
-} from "./application.validation";
+import { validateApplication, validateUpdateApplication } from "./application.validation";
 import { ApplicationServices } from "./application.services";
 
 const getApplications: RequestHandler = async (req, res, next) => {
   try {
     const queryData = req.query;
     const data = await ApplicationServices.getApplications(queryData);
-    if (data.length <= 0) {
+    if (data.data.length <= 0) {
       emptyResponse(res, data);
       return;
     }
     res.status(200).json({
       success: true,
       message: "Applications retrieved successfully.",
-      dataLength: data.length,
+      dataLength: data.data.length,
       data,
     });
   } catch (err) {

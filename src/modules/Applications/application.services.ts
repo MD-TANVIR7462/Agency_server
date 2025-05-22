@@ -5,25 +5,47 @@ import { PositionServices } from "../OpenPosition/position.services";
 import { TApplication } from "./application.interface";
 import { ApplicationModel } from "./application.model";
 
+import mongoose from "mongoose";
+
 const getApplications = async (queryData: any) => {
-  console.log(queryData);
+  const { page = 1, limit = 25, status, positionId, ...restFilters } = queryData;
 
-  const excludeQuery = { ...queryData };
-  const deletedQuery = ["limit", "page", "positionId", "status"];
-  deletedQuery.forEach((key) => delete excludeQuery[key]);
-
-  const limit = queryData.limit ? Number(queryData.limit) : 25;
-  const page = queryData.page ? Number(queryData.page) : 1;
-  const skip = (page - 1) * limit;
+  const skip = (Number(page) - 1) * Number(limit);
 
   const query: Record<string, any> = {
-    isDeleted: false,
-    ...excludeQuery,
+    ...restFilters,
   };
 
-  const result = await ApplicationModel.find(query).select("-isDeleted -__v").skip(skip).limit(limit);
+  // Apply status filter
+  if (status && status !== "all") {
+    if (status === "pending") {
+      query.isPending = true;
+    } else if (status === "selected") {
+      query.isSelected = true;
+    } else if (status === "rejected") {
+      query.isRejected = true;
+    }
+  }
 
-  return result;
+  // Convert positionId to ObjectId
+  if (positionId && mongoose.Types.ObjectId.isValid(positionId)) {
+    query.positionId = new mongoose.Types.ObjectId(positionId);
+  }
+
+  const [results, total] = await Promise.all([
+    ApplicationModel.find(query).select("-isDeleted -__v").skip(skip).limit(Number(limit)),
+    ApplicationModel.countDocuments(query),
+  ]);
+
+  return {
+    data: results,
+    pagination: {
+      total,
+      page: Number(page),
+      limit: Number(limit),
+      totalPages: Math.ceil(total / Number(limit)),
+    },
+  };
 };
 
 const getAnApplication = async (id: string) => {
