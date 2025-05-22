@@ -1,13 +1,15 @@
 import { sendConfirmationEmail } from "../../utils/SendConfirmationEmail";
-import {   sendNotificationToAdminEmail } from "../../utils/sendNotificationMailtoAdmin";
+import { sendNotificationToAdminEmail } from "../../utils/sendNotificationMailtoAdmin";
+import { PositionModel } from "../OpenPosition/position.model";
 import { PositionServices } from "../OpenPosition/position.services";
 import { TApplication } from "./application.interface";
 import { ApplicationModel } from "./application.model";
 
 const getApplications = async (queryData: any) => {
+  console.log(queryData)
   const excludeQuery = { ...queryData };
-  const deletedQuery = ["limit", "page", "positionId"];
-  const limit = queryData.limit || 25;
+  const deletedQuery = ["limit", "page", "positionId","status"];
+  const limit = queryData.limit || 30;
   deletedQuery.forEach((element) => delete excludeQuery[element]);
 
   const paginationQuery =
@@ -56,7 +58,7 @@ const createApplication = async (data: TApplication) => {
   session.startTransaction();
 
   try {
-    const findPosition = await PositionServices.getAPosition(data.positionId as string);
+    const findPosition = await PositionModel.findOne({ isDeleted: false, isActive: true, _id: data.positionId });
     if (!findPosition) {
       await session.abortTransaction();
       session.endSession();
@@ -104,7 +106,7 @@ const selectApplication = async (id: string) => {
     {
       $set: {
         isSelected: !application.isSelected,
-        isPending: !application.isPending,
+        isPending: false,
         isRejected: false,
       },
     },
@@ -122,7 +124,7 @@ const rejectApplication = async (id: string) => {
     id,
     {
       $set: {
-        isPending: !application.isPending,
+        isPending: false,
         isRejected: !application.isRejected,
         isSelected: false,
       },
