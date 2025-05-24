@@ -2,10 +2,7 @@ import { TSettings } from "./settings.interface";
 import { SettingsModel } from "./settings.model";
 
 const getSettings = async () => {
-  const result = await SettingsModel.find({
-    isDeleted: false,
-    isActive: true,
-  }).select("-__v -isDeleted");
+  const result = await SettingsModel.find().select("-__v");
   return result;
 };
 

@@ -5,4 +5,5 @@ export type TSettings = {
   twitter?: string;
   linkedin?: string;
   instagram?: string;
+  logo?:string
 };
