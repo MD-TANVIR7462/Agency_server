@@ -115,9 +115,10 @@ const createApplication = async (data: TApplication) => {
     session.endSession();
     return result[0];
   } catch (error) {
+    
     await session.abortTransaction();
     session.endSession();
-    throw error;
+    return null
   }
 };
 

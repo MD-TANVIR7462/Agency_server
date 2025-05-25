@@ -13,7 +13,7 @@ const applicationSchema = new Schema<TApplication>(
       required: [true, "Full name is required."],
       trim: true,
       minlength: [3, "Full name must be at least 3 characters long."],
-      maxlength: [100, "Full name cannot exceed 100 characters."],
+      maxlength: [50, "Full name cannot exceed 100 characters."],
     },
     email: {
       type: String,
