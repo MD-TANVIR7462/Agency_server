@@ -44,7 +44,7 @@ const updateStory: RequestHandler = async (req, res, next) => {
     }
     res.status(200).json({
       success: true,
-      message: "Story created successfully",
+      message: "Story Updated successfully",
       data,
     });
   } catch (err) {
