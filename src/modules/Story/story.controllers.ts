@@ -28,6 +28,7 @@ const createStory: RequestHandler = async (req, res, next) => {
       success: true,
       message: "Story created successfully",
       data,
+      
     });
   } catch (err) {
     next(err);
