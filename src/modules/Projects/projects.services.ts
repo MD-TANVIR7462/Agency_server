@@ -14,7 +14,6 @@ const getProjects = async (queryData: any) => {
   if (queryData?.isFeatured !== undefined) {
     query.isFeatured = queryData.isFeatured;
   }
-  // console.log(queryData, "sds" ,query);
   const result = await ProjectModel.find(query).select("-isDeleted -__v").sort("-createdAt");
   return result;
 };

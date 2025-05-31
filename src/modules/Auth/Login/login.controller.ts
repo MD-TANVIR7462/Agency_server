@@ -26,7 +26,6 @@ const loginUuser: RequestHandler = async (req, res, next) => {
 const getRefreshToken: RequestHandler = async (req, res, next) => {
   try {
     const { refreshToken } = req.cookies;
-console.log(refreshToken)
     const token = refreshTokenValidation.parse(refreshToken);
 
     const result = await loginServices.refreshToken(token as any);
