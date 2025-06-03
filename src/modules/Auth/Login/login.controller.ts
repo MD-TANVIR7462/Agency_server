@@ -31,7 +31,7 @@ const getRefreshToken: RequestHandler = async (req, res, next) => {
     const result = await loginServices.refreshToken(token as any);
     res.status(200).send({
       success: true,
-      message: "Access Token Created successfully.",
+      message: "Refresh Token Created successfully.",
       data: result,
     });
   } catch (err) {
