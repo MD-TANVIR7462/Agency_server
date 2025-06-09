@@ -10,6 +10,8 @@ const websiteLink = process.env.WEBSITE_LINK;
 const nodeENV = process.env.NODE_ENV;
 const gmailAuthPass = process.env.GMAIL_AUTH_PASS;
 const recruiter_gmail = process.env.RECRUITER_GMAIL;
+const tokenExpiresIn = process.env.JWT_TOKEN_EXPIRES_IN;
+
 
 export const envConfig = {
   bcryptRound,
@@ -19,5 +21,6 @@ export const envConfig = {
   websiteLink,
   nodeENV,
   gmailAuthPass,
-  recruiter_gmail
+  recruiter_gmail,
+  tokenExpiresIn
 };

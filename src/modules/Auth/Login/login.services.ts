@@ -27,7 +27,7 @@ const loginUuser = async (data: TLogin) => {
     role: isUserExist.role,
   };
   const jwt_Secret = envConfig.accessSecret;
-  const accessToken = jwt.sign(userData, jwt_Secret as string, { expiresIn: "60s" });
+  const accessToken = jwt.sign(userData, jwt_Secret as string, { expiresIn: "3d" });
   const refreshToken = jwt.sign(userData, envConfig.refreSecret as string, { expiresIn: "365d" });
   const result = {
     accessToken,
@@ -74,7 +74,7 @@ const refreshToken = async (token: string) => {
       email: isUserExist.email,
       role: isUserExist.role,
     };
-    const accessToken = jwt.sign(userData, envConfig.refreSecret as string, { expiresIn: "12h" });
+    const accessToken = jwt.sign(userData, envConfig.refreSecret as string, { expiresIn: "3d" });
 
     return { accessToken }; // Return the new access token
   } catch (error) {
