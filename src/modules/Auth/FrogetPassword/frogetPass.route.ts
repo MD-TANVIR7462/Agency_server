@@ -3,6 +3,6 @@ import { frogetPasswordController, resetPasswordController } from "./frogetpass.
 
 const router = Router();
 router.post("/forget-password/", frogetPasswordController);
-router.post("/reset-password/", resetPasswordController);
+router.patch("/reset-password/", resetPasswordController);
 
 export const frogetPasswordRoute = router;
